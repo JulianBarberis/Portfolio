@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* GTA 6 Palette */
+  --ocean-twilight: #3744bd;
+  --deep-pink: #f8559f;
+  --ruby-red: #a31621;
+  --dust-grey: #dbcdc6;
+  --porcelain: #fbfef9;
+
+  /* Apple Glass Light Mode */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-border-subtle: rgba(55, 68, 189, 0.1);
+  --glass-shadow: 0 20px 40px -15px rgba(55, 68, 189, 0.07), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --glow-pink: rgba(248, 85, 159, 0.2);
+  --glow-indigo: rgba(55, 68, 189, 0.15);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Apple Glass Dark Mode (Vice City Cyber Night) */
+  --bg-primary: #05060d;
+  --bg-secondary: #0b0e1b;
+  --glass-bg: rgba(18, 22, 43, 0.55);
+  --glass-bg-hover: rgba(26, 32, 60, 0.70);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-border-subtle: rgba(219, 205, 198, 0.10);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+  --text-primary: #fbfef9;
+  --text-secondary: #d4dce8;
+  --text-muted: #a8b8cc;
+  --glow-pink: rgba(248, 85, 159, 0.3);
+  --glow-indigo: rgba(55, 68, 189, 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "SF Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+/* Global Focus Ring */
+*:focus-visible {
+  outline: 2px solid #f8559f;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Apple Liquid Glass Surface */
+.apple-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.apple-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(248, 85, 159, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 25px 45px -10px var(--glow-pink), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Apple Frosted Glass Navbar (Esmerilado) */
+.apple-glass-nav {
+  background: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+}
+
+.dark .apple-glass-nav {
+  background: rgba(6, 8, 18, 0.90);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.apple-glass-pill {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* GTA 6 Typography Gradients */
+.text-gta-sunset {
+  background: linear-gradient(135deg, #f8559f 0%, #ff70a6 35%, #e8384f 65%, #7080ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gta-ocean {
+  background: linear-gradient(135deg, #3744bd 0%, #7080ff 50%, #f8559f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gta-gradient {
+  background: linear-gradient(135deg, #f8559f 0%, #a31621 45%, #3744bd 100%);
+}
+
+.bg-gta-subtle {
+  background: linear-gradient(135deg, rgba(248, 85, 159, 0.15) 0%, rgba(55, 68, 189, 0.15) 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f8559f;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 7s ease-in-out infinite;
+}
+
+@keyframes taglineCycle {
+  0%, 28% {
+    transform: translateY(0%);
+  }
+  33%, 61% {
+    transform: translateY(-33.333%);
+  }
+  66%, 95% {
+    transform: translateY(-66.666%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-tagline-cycle {
+  animation: taglineCycle 9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-pulse-glow {
+    animation: none;
+  }
+  .animate-ping {
+    animation: none;
+  }
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #05060d;
+  background: #ffffff;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 16px;
 }

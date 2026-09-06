@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import { ProjectItem } from "@/data/types";
 import ProjectModal from "./ProjectModal";
 import TechIcon from "./TechIcon";
-import { FolderGit2, ExternalLink, Rocket, Clock, Sparkles, Terminal, Database, Layout } from "lucide-react";
-import { GitHubIcon } from "@/components/icons/SocialIcons";
+import CoverflowCarousel from "./carousel/CoverflowCarousel";
+import CarouselControls from "./carousel/CarouselControls";
+import EmptyCategory from "./carousel/EmptyCategory";
+import { FolderGit2 } from "lucide-react";
 
 function ProjectVisualHeader({ project }: { project: ProjectItem }) {
-  if (project.id === "booklibre" || project.id === "biblioteca-comunitaria" || project.title.toLowerCase().includes("book")) {
+  if (
+    project.id === "booklibre" ||
+    project.id === "biblioteca-comunitaria" ||
+    project.title.toLowerCase().includes("book")
+  ) {
     return (
       <div className="h-28 rounded-2xl bg-black/30 dark:bg-black/50 border border-white/10 p-3.5 flex flex-col justify-between font-mono text-[11px] overflow-hidden relative group-hover:border-[#f8559f]/40 transition-colors shadow-inner">
         <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
@@ -57,7 +64,7 @@ function ProjectVisualHeader({ project }: { project: ProjectItem }) {
         </div>
         <div className="space-y-0.5 font-mono text-[11px]">
           <p className="text-[var(--text-muted)] text-[10px] truncate">
-            &gt; "Top 5 clientes con más órdenes"
+            &gt; &quot;Top 5 clientes con más órdenes&quot;
           </p>
           <p className="text-cyan-300 font-semibold text-[10px] truncate">
             SELECT name, COUNT(*) FROM orders...
@@ -85,7 +92,7 @@ function ProjectVisualHeader({ project }: { project: ProjectItem }) {
           <span>vice_city.glass</span>
         </span>
         <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[9px] font-bold flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           STATIC
         </span>
       </div>
@@ -106,15 +113,18 @@ function ProjectVisualHeader({ project }: { project: ProjectItem }) {
         <span className="text-[#06B6D4] flex items-center gap-1 font-semibold">
           <TechIcon name="Tailwind CSS" className="w-3 h-3" /> Tailwind
         </span>
-        <span className="text-[var(--text-secondary)] font-semibold">GitHub Pages CI/CD</span>
+        <span className="text-[var(--text-secondary)] font-semibold">
+          GitHub Pages CI/CD
+        </span>
       </div>
     </div>
   );
 }
 
 export default function Projects() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   const projects = portfolioData.projects;
@@ -125,10 +135,50 @@ export default function Projects() {
     return proj.category === activeCategory;
   });
 
+  const safeActiveIndex = Math.min(
+    activeIndex,
+    Math.max(0, filteredProjects.length - 1)
+  );
+
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setActiveIndex(0);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (selectedProject !== null) return;
+    if (filteredProjects.length === 0) return;
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setActiveIndex((prev) => Math.max(0, prev - 1));
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setActiveIndex((prev) =>
+        Math.min(filteredProjects.length - 1, prev + 1)
+      );
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setActiveIndex(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setActiveIndex(filteredProjects.length - 1);
+    }
+  };
+
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <section
+      id="projects"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={
+        language === "es" ? "Proyectos Destacados" : "Featured Projects"
+      }
+      className="py-20 relative outline-none focus-visible:ring-1 focus-visible:ring-[#f8559f]/30"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f8559f]/10 border border-[#f8559f]/30 text-xs font-bold uppercase tracking-wider text-[#f8559f]">
@@ -141,14 +191,22 @@ export default function Projects() {
         </div>
 
         {/* Category Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 mb-8 p-1 rounded-full apple-glass max-w-fit mx-auto">
+        <div
+          role="tablist"
+          aria-label={
+            language === "es" ? "Filtrar por categoría" : "Filter by category"
+          }
+          className="flex flex-wrap items-center justify-center gap-1.5 mb-8 p-1 rounded-full apple-glass max-w-fit mx-auto"
+        >
           {categories.map((cat) => {
             const isSelected = activeCategory === cat;
             return (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] ${
+                role="tab"
+                aria-selected={isSelected}
+                onClick={() => handleCategoryChange(cat)}
+                className={`px-3.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none ${
                   isSelected
                     ? "bg-[#3744bd] text-white shadow-sm"
                     : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
@@ -160,103 +218,65 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {filteredProjects.map((project) => {
-            const isLive = project.status === "live";
+        {/* Screen Reader Live Region */}
+        {filteredProjects.length > 0 && (
+          <div className="sr-only" aria-live="polite" aria-atomic="true">
+            {language === "es"
+              ? `Proyecto ${safeActiveIndex + 1} de ${filteredProjects.length}: ${
+                  filteredProjects[safeActiveIndex]?.title
+                }`
+              : `Project ${safeActiveIndex + 1} of ${filteredProjects.length}: ${
+                  filteredProjects[safeActiveIndex]?.title
+                }`}
+          </div>
+        )}
 
-            return (
-              <div
-                key={project.id}
-                className="apple-glass-card rounded-3xl p-5 flex flex-col justify-between space-y-4 group transition-all duration-300 hover:-translate-y-1"
+        {/* Carousel Presentation Stage */}
+        {filteredProjects.length === 0 ? (
+          <EmptyCategory
+            onResetCategory={() => handleCategoryChange("All")}
+          />
+        ) : (
+          <div className="relative w-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.22, ease: "easeInOut" }}
+                className="w-full"
               >
-                <div className="space-y-3.5">
-                  {/* Visual Architecture Banner Anchor */}
-                  <ProjectVisualHeader project={project} />
-
-                  {/* Category & Status */}
-                  <div className="flex items-center justify-between gap-2 pt-1">
-                    <span className="text-[11px] font-mono font-bold text-[#3744bd] dark:text-[#93c5fd] uppercase tracking-wider">
-                      {project.category}
-                    </span>
-
-                    {isLive ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                        <span>{language === "es" ? "En Producción" : "Live"}</span>
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
-                        <Clock className="w-2.5 h-2.5" />
-                        <span>{language === "es" ? "Deploy Próximo" : "Deploying"}</span>
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title & Tagline */}
-                  <div>
-                    <h3 className="text-lg font-bold text-[var(--text-primary)] group-hover:text-[#f8559f] transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs text-[var(--text-muted)] mt-1 line-clamp-2 leading-relaxed">
-                      {t(project.tagline)}
-                    </p>
-                  </div>
-
-                  {/* Tech Chips with Authentic Brand Icons */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {project.technologies.slice(0, 4).map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-mono bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
-                      >
-                        <TechIcon name={tech} className="w-3 h-3 shrink-0" />
-                        <span>{tech}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Card Actions */}
-                <div className="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between gap-2">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`GitHub for ${project.title}`}
-                    className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[var(--text-muted)] hover:text-[#f8559f] transition-colors focus-visible:ring-2 focus-visible:ring-[#f8559f]"
-                  >
-                    <GitHubIcon className="w-4 h-4" />
-                  </a>
-
-                  {isLive && project.demoUrl ? (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-sm shadow-[#f8559f]/20 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f]"
-                    >
-                      <span>Demo</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  ) : (
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/40 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f]"
-                    >
-                      <Rocket className="w-3 h-3 text-[#f8559f]" />
-                      <span>{language === "es" ? "Detalles" : "Details"}</span>
-                    </button>
+                <CoverflowCarousel
+                  projects={filteredProjects}
+                  activeIndex={safeActiveIndex}
+                  onSelectIndex={setActiveIndex}
+                  onOpenModal={setSelectedProject}
+                  renderVisualHeader={(proj) => (
+                    <ProjectVisualHeader project={proj} />
                   )}
-                </div>
+                />
+              </motion.div>
+            </AnimatePresence>
 
-              </div>
-            );
-          })}
-        </div>
-
+            {/* Navigation and Pagination Controls */}
+            <CarouselControls
+              total={filteredProjects.length}
+              activeIndex={safeActiveIndex}
+              onPrev={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
+              onNext={() =>
+                setActiveIndex((prev) =>
+                  Math.min(filteredProjects.length - 1, prev + 1)
+                )
+              }
+              onSelectIndex={setActiveIndex}
+              projects={filteredProjects}
+            />
+          </div>
+        )}
       </div>
 
+      {/* ProjectModal rendered outside 3D perspective stage */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}

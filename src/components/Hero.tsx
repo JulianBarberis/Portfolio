@@ -12,7 +12,7 @@ export default function Hero() {
   const subtitles = tArr(personal.subtitles);
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-24 pb-12 overflow-hidden">
+    <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center pt-20 pb-12 overflow-hidden">
       {/* Apple / GTA 6 Ambient Backdrop Mesh */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[800px] h-[350px] bg-gradient-to-tr from-[#3744bd]/25 via-[#f8559f]/20 to-[#a31621]/15 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow" />
 

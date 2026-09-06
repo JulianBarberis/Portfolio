@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
-import { User, CheckCircle2, Award, Sparkles, Layers, ShieldCheck } from "lucide-react";
+import { User, Calendar } from "lucide-react";
+import profilePhoto from "../../public/profile.jpg";
 
 export default function About() {
-  const { language, t, tArr } = useLanguage();
-  const { personal } = portfolioData;
-
-  const fullBioParagraphs = tArr(personal.fullBio);
+  const { language, t } = useLanguage();
+  const educationItems = portfolioData.education;
 
   return (
-    <section id="about" className="py-16 relative">
+    <section id="about" className="py-20 relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -23,56 +23,60 @@ export default function About() {
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
             {language === "es" 
-              ? "Formación académica y rigor de ingeniería." 
-              : "Computer Science Foundations & Practical Engineering."}
+              ? "Formación Académica" 
+              : "Academic Background"}
           </h2>
         </div>
 
-        {/* Apple-style Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+        {/* Layout: Education on Left (no card background, showing section background), Photo on Right */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           
-          {/* Main Bio Card */}
-          <div className="md:col-span-7 apple-glass-card p-6 rounded-3xl space-y-4 flex flex-col justify-between">
-            <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#f8559f]">Profile</span>
-              <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
-                {fullBioParagraphs[0]}
-              </p>
-              <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-                {fullBioParagraphs[1]}
-              </p>
-            </div>
-
-            {/* Quick Skills Pill Bar */}
-            <div className="pt-3 border-t border-black/5 dark:border-white/10 flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/5 text-[var(--text-primary)] border border-white/5">
-                Clean Architecture & DDD
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/5 text-[var(--text-primary)] border border-white/5">
-                Docker Containers
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/5 dark:bg-white/5 text-[var(--text-primary)] border border-white/5">
-                LLM Engineering
-              </span>
-            </div>
-          </div>
-
-          {/* Metrics Bento Grid */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-3">
-            {personal.stats.map((stat, i) => (
-              <div 
-                key={i} 
-                className="apple-glass-card p-4 rounded-2xl flex flex-col justify-between space-y-2"
+          {/* Education Rows directly on background */}
+          <div className="md:col-span-7 flex flex-col justify-center space-y-6">
+            {educationItems.map((edu, idx) => (
+              <div
+                key={edu.id}
+                className={`space-y-3 ${idx !== 0 ? "pt-6 border-t border-black/5 dark:border-white/10" : ""}`}
               >
-                <div className="text-2xl sm:text-3xl font-black text-gta-sunset">
-                  {stat.value}
-                  {stat.suffix && <span className="text-lg text-[#3744bd] ml-0.5">{stat.suffix}</span>}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20">
+                      {t(edu.badge || { en: "Degree", es: "Grado" })}
+                    </span>
+                    <span className="text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-[#3744bd] dark:text-[#93c5fd]" />
+                      {t(edu.period)}
+                    </span>
+                  </div>
+
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold apple-glass text-[var(--text-muted)]">
+                    {t(edu.status)}
+                  </span>
                 </div>
-                <p className="text-xs font-semibold text-[var(--text-muted)] leading-tight">
-                  {t(stat.label)}
-                </p>
+
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
+                    {t(edu.degree)}
+                  </h3>
+                  <p className="text-sm sm:text-base font-semibold text-[#3744bd] dark:text-[#93c5fd] mt-1">
+                    {t(edu.institution)}
+                  </p>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Julian's Profile Image */}
+          <div className="md:col-span-5 rounded-3xl overflow-hidden relative group min-h-[340px] sm:min-h-[380px] shadow-2xl">
+            <Image
+              src={profilePhoto}
+              alt="Julian Barberis"
+              fill
+              priority
+              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
           </div>
 
         </div>

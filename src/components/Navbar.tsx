@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import { portfolioData } from "@/data/portfolioData";
 import { Sun, Moon, Menu, X } from "lucide-react";
+import profilePhoto from "../../public/profile.jpg";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
@@ -17,8 +19,7 @@ export default function Navbar() {
   const navLinks = [
     { id: "about", label: t(nav.about) },
     { id: "skills", label: t(nav.skills) },
-    { id: "experience", label: t(nav.experience) },
-    { id: "education", label: t(nav.education) },
+    // { id: "experience", label: t(nav.experience) },
     { id: "projects", label: t(nav.projects) },
     { id: "contact", label: t(nav.contact) },
   ];
@@ -30,12 +31,17 @@ export default function Navbar() {
         {/* Brand / Logo */}
         <a
           href="#"
-          className="group flex items-center gap-2 text-sm sm:text-base font-bold tracking-tight text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[#f8559f] rounded-full"
+          className="group flex items-center gap-2.5 text-sm sm:text-base font-bold tracking-tight text-[var(--text-primary)] focus-visible:ring-2 focus-visible:ring-[#f8559f] rounded-full"
         >
-          <div className="w-7 h-7 rounded-full bg-[#f8559f] dark:bg-white/20 p-[1.5px] shadow-sm transition-transform duration-300 group-hover:scale-105">
-            <div className="w-full h-full bg-[var(--bg-primary)] rounded-full flex items-center justify-center">
-              <span className="text-[11px] font-black text-[#f8559f]">JB</span>
-            </div>
+          <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/15 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-black/20 dark:group-hover:border-white/30 overflow-hidden relative">
+            <Image
+              src={profilePhoto}
+              alt="Julian Barberis"
+              width={32}
+              height={32}
+              className="w-full h-full object-cover object-top"
+              priority
+            />
           </div>
           <span>
             Julian Barberis

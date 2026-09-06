@@ -107,12 +107,12 @@ export const portfolioData: PortfolioData = {
         es: "Tecnicatura Universitaria en Programación Informática",
       },
       period: {
-        en: "2023 – 2026 (Expected)",
-        es: "2023 – 2026 (En Curso)",
+        en: "2023 – 2026",
+        es: "2023 – 2026",
       },
       status: {
-        en: "Advanced Student",
-        es: "Estudiante Avanzado",
+        en: "Graduated",
+        es: "Graduado",
       },
       location: {
         en: "Buenos Aires, Argentina",

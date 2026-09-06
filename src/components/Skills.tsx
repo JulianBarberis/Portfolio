@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import TechIcon from "./TechIcon";
+import { Sparkles } from "lucide-react";
 
 export default function Skills() {
   const { language, t } = useLanguage();
@@ -34,6 +35,10 @@ export default function Skills() {
         
         {/* Header (Achyut Katiyar Typography & Hierarchy) */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f8559f]/10 border border-[#f8559f]/30 text-xs font-bold uppercase tracking-wider text-[#f8559f]">
+            <Sparkles className="w-3 h-3" />
+            <span>{language === "es" ? "Habilidades" : "Skills"}</span>
+          </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
             {language === "es" ? "Habilidades Técnicas" : "Technical Skills"}
           </h2>

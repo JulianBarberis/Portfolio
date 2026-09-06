@@ -50,10 +50,10 @@ Built with **Next.js 15**, **React 19**, **TypeScript**, **Tailwind CSS**, **Fra
 
 ```bash
 # 1. Install dependencies
-npm install
+pnpm install
 
 # 2. Start the local development server
-npm run dev
+pnpm dev
 
 # 3. Open http://localhost:3000 in your browser
 ```

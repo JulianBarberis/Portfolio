@@ -1,111 +1,120 @@
-# Julian Barberis — Software Developer Portfolio (GTA VI Edition) 🌴🌆
+# Julian Barberis — Portfolio de Desarrollador de Software
 
-A modern, high-performance, bilingual (English / Spanish) developer portfolio with Dark / Light mode, styled with the vibrant color palette and aesthetic of **GTA VI (Vice City)**.
-
-Built with **Next.js 15**, **React 19**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **Lucide Icons**, optimized for static export and automated deployment to **GitHub Pages**.
+> Portfolio profesional bilingüe (Español / Inglés) con modo oscuro y claro, construido con **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4** y **Framer Motion**. Desplegado automáticamente en **GitHub Pages** mediante GitHub Actions.
 
 ---
 
-## 🎨 GTA 6 Color Palette
+## ✨ Características Principales
 
-| Token | Hex | Role |
-|---|---|---|
-| `--ocean-twilight` | `#3744bd` | Deep Indigo / Electric Twilight Accent & Buttons |
-| `--deep-pink` | `#f8559f` | Vice City Neon Pink Glows, Badges & Highlights |
-| `--ruby-red` | `#a31621` | Crimson Ruby Accents & Danger / Status Highlights |
-| `--dust-grey` | `#dbcdc6` | Muted Warm Grey & Secondary Details |
-| `--porcelain` | `#fbfef9` | Crisp Porcelain Text & Light Mode Canvas |
+### 🎨 Diseño & Experiencia Visual
+- **Modo Oscuro / Claro** con paleta Apple Glassmorphism: obsidiana profunda (`#05060d`), azul twilight (`#3744bd`) y rosa eléctrico (`#f8559f`), con persistencia en `localStorage`.
+- **Superficies Apple Glass** con `backdrop-filter: blur(24px) saturate(190%)`, bordes especulares de 1px y sombras líquidas multicapa.
+- **Microinteracciones** con física de resorte (`Framer Motion`): pastillas deslizantes, ciclo de subtítulos cinético y transiciones de layout animadas.
+- **Contraste WCAG 2.1 AA** verificado matemáticamente en ambos modos.
 
----
+### 🌐 Internacionalización (EN / ES)
+- Cambio de idioma en tiempo real desde la barra de navegación.
+- Traducciones completas en cada sección: Hero, Sobre mí, Experiencia, Educación, Habilidades, Proyectos y Contacto.
+- Toda la información personal y de proyectos centralizada en [`src/data/portfolioData.ts`](src/data/portfolioData.ts).
 
-## 🌟 Key Features
+### 🗂️ Secciones del Portfolio
+| Sección | Descripción |
+|---|---|
+| **Hero** | Presentación con jerarquía tipográfica de alto impacto, badge de disponibilidad pulsante y tarjeta bento de arquitectura técnica |
+| **Sobre mí** | Formación académica (UNSAM y Coderhouse), foto de perfil e historial educativo |
+| **Experiencia** | Bento grid de trayectoria técnica: de proyectista eléctrico CAD a desarrollador de software con Clean Architecture |
+| **Habilidades** | Matriz interactiva filtrable por categoría con iconos SVG de marca auténticos |
+| **Proyectos** | Carrusel dual (modo Fluido con física magnética / modo Coverflow 3D) con modales de arquitectura detallados |
+| **Contacto** | Formulario interactivo con validación, copia al portapapeles y animación confetti |
 
-1. **Light & Dark Mode**:
-   - **Dark Mode**: Atmospheric Vice City Cyber Night with glowing neon borders, ambient gradient blurs, and glassmorphism.
-   - **Light Mode**: Ultra-crisp porcelain background with soft tinted borders and high-contrast indigo typography.
-   - Persistent across reloads via `localStorage`.
-
-2. **Bilingual Support (EN / ES)**:
-   - Real-time language switch button (🇺🇸 EN / 🇦🇷 ES) in the navigation bar.
-   - Complete translations for every section: Hero, About, Experience (M-Electrica), Education (UNSAM & Coderhouse), Skills, Projects, and Contact.
-
-3. **CV Integration**:
-   - **Education**: UNSAM Associate Degree in Computer Programming (Tecnicatura Universitaria en Programación Informática, 2023–2026) and Coderhouse Full Stack Certification.
-   - **Experience**: AutoCAD Electrical Drafter at M-Electrica (50+ blueprints, panel layouts, technical compliance).
-   - **Skills**: Filterable matrix spanning Frontend, Backend & Databases, DevOps & Tools, and AI Integration.
-
-4. **Smart Project Showcase**:
-   - Includes featured projects (*BookLibre* DDD platform, *SQLify* AI SQL Generator, *GTA VI Portfolio*).
-   - Dynamic **Deployment Status**:
-     - `Live Demo`: Directly opens deployed apps.
-     - `Deploy in Progress`: Opens an interactive **Project Architecture & Deployment Roadmap Modal** instead of a dead link.
-
-5. **Direct Contact & Copy-to-Clipboard**:
-   - 1-click email copy button (`jbarberis.tech@gmail.com`) with instant toast feedback.
-   - Interactive message form with celebratory confetti animation.
+### 🛠️ Stack Tecnológico
+| Capa | Tecnologías |
+|---|---|
+| **Framework** | Next.js 16.3 (App Router, exportación estática) |
+| **UI** | React 19, Tailwind CSS v4, Framer Motion |
+| **Lenguaje** | TypeScript estricto |
+| **Tipografía** | Inter (`--font-sans`) + JetBrains Mono (`--font-mono`) vía `next/font/google` |
+| **Íconos** | `react-icons/si`, Lucide React |
+| **Deploy** | GitHub Actions → GitHub Pages |
 
 ---
 
-## 🚀 Getting Started (Local Development)
+## 🚀 Instalación y Desarrollo Local
 
 ```bash
-# 1. Install dependencies
+# 1. Clonar el repositorio
+git clone https://github.com/jbarberis/portfolio.git
+cd portfolio
+
+# 2. Instalar dependencias (requiere pnpm)
 pnpm install
 
-# 2. Start the local development server
+# 3. Iniciar el servidor de desarrollo
 pnpm dev
 
-# 3. Open http://localhost:3000 in your browser
+# 4. Abrir en el navegador
+# http://localhost:3000
+```
+
+> **Requisitos:** Node.js ≥ 20 y pnpm ≥ 9.
+
+---
+
+## 🏗️ Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── globals.css          # Tokens CSS: paleta, Apple Glass, tipografía
+│   ├── layout.tsx           # Configuración de fuentes (Inter + JetBrains Mono)
+│   └── page.tsx             # Composición de secciones
+├── components/
+│   ├── Hero.tsx             # Sección hero con bento de arquitectura
+│   ├── About.tsx            # Formación académica + foto de perfil
+│   ├── Experience.tsx       # Bento grid de trayectoria técnica
+│   ├── Skills.tsx           # Matriz interactiva de habilidades
+│   ├── Projects.tsx         # Escaparate de proyectos + selector de carrusel
+│   ├── Contact.tsx          # Formulario de contacto + redes sociales
+│   ├── Navbar.tsx           # Navbar flotante con switcher de idioma y tema
+│   ├── Footer.tsx           # Footer minimalista
+│   ├── TechIcon.tsx         # Íconos SVG de marcas tecnológicas
+│   └── carousel/
+│       ├── CoverflowCarousel.tsx    # Carrusel 3D estilo coverflow
+│       └── ProjectCard.tsx          # Tarjeta de proyecto individual
+├── context/
+│   ├── LanguageContext.tsx  # Contexto global de idioma (EN/ES)
+│   └── ThemeContext.tsx     # Contexto global de tema (dark/light)
+└── data/
+    ├── portfolioData.ts     # Única fuente de verdad para todo el contenido
+    └── types.ts             # Tipos TypeScript del portfolio
 ```
 
 ---
 
-## 📦 How to Deploy to GitHub Pages (100% Free & Automated)
+## ⚙️ Personalización del Contenido
 
-This repository includes a ready-to-use GitHub Actions workflow (`.github/workflows/deploy.yml`).
-
-### Steps to Deploy:
-1. **Push your code to GitHub**:
-   ```bash
-   git add .
-   git commit -m "feat: GTA 6 bilingual developer portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo-name>.git
-   git push -u origin main
-   ```
-
-2. **Enable GitHub Pages in your repository**:
-   - Go to your repository on GitHub.
-   - Click on **Settings** → **Pages** (in the left sidebar).
-   - Under **Build and deployment** → **Source**, select **GitHub Actions**.
-
-3. **That's it!** GitHub Actions will automatically build the static website and deploy it to `https://<your-username>.github.io/<your-repo-name>/`.
-
----
-
-## ⚙️ How to Customize Your Content & Projects
-
-All bilingual texts, personal info, education, skills, and projects are centralized in a single configuration file:
+Todo el contenido bilingüe está centralizado en un único archivo de configuración:
 
 📁 **[`src/data/portfolioData.ts`](src/data/portfolioData.ts)**
 
-### Adding or Updating a Project:
+### Agregar o actualizar un proyecto
+
 ```ts
 {
-  id: "my-new-project",
-  title: "Project Name",
+  id: "mi-nuevo-proyecto",
+  title: "Nombre del Proyecto",
   category: "Full-Stack", // "Full-Stack" | "Backend" | "Frontend" | "AI"
   year: "2026",
   featured: true,
-  status: "live", // "live" | "coming_soon" | "in_development"
-  demoUrl: "https://my-live-demo.com", // Set to undefined if deploy is pending
-  githubUrl: "https://github.com/jbarberis/my-project",
+  status: "live",          // "live" | "coming_soon" | "in_development"
+  demoUrl: "https://mi-demo.com",     // undefined si el deploy está pendiente
+  githubUrl: "https://github.com/jbarberis/mi-proyecto",
   tagline: {
     en: "Short English tagline",
     es: "Descripción corta en español",
   },
   description: {
-    en: "Detailed English overview...",
+    en: "Detailed English description...",
     es: "Descripción detallada en español...",
   },
   technologies: ["Kotlin", "Spring Boot", "React", "PostgreSQL", "Docker"],
@@ -114,15 +123,55 @@ All bilingual texts, personal info, education, skills, and projects are centrali
     es: ["Característica técnica clave 1", "Característica técnica clave 2"],
   },
   roadmap: {
-    en: ["Step 1: Containerizing API", "Step 2: Deploying to cloud"],
-    es: ["Paso 1: Contenerizando API", "Paso 2: Desplegando en la nube"],
+    en: ["Step 1: Containerize API", "Step 2: Deploy to cloud"],
+    es: ["Paso 1: Contenerizar API", "Paso 2: Desplegar en la nube"],
   }
 }
 ```
 
 ---
 
-## 💡 Note on Next.js vs. NestJS
+## 🌍 Deploy en GitHub Pages (Gratis y Automatizado)
 
-- **Next.js** (used here): Leading React framework for building frontend applications, static websites (perfect for GitHub Pages), and full-stack React apps.
-- **NestJS**: Backend Node.js framework for architecting scalable REST APIs, microservices, and server-side logic (often paired with PostgreSQL, Docker, and Spring Boot / Kotlin principles).
+El repositorio incluye un workflow de GitHub Actions listo para usar en `.github/workflows/deploy.yml`.
+
+### Pasos para desplegar
+
+1. **Subir el código a GitHub:**
+   ```bash
+   git add .
+   git commit -m "feat: primer despliegue del portfolio"
+   git branch -M main
+   git remote add origin https://github.com/<tu-usuario>/<tu-repo>.git
+   git push -u origin main
+   ```
+
+2. **Habilitar GitHub Pages en el repositorio:**
+   - Ir a **Settings → Pages** (barra lateral izquierda).
+   - En **Build and deployment → Source**, seleccionar **GitHub Actions**.
+
+3. **¡Listo!** El workflow construirá el sitio estático y lo publicará automáticamente en:
+   ```
+   https://<tu-usuario>.github.io/<tu-repo>/
+   ```
+
+---
+
+## 🔧 Scripts Disponibles
+
+```bash
+pnpm dev      # Servidor de desarrollo en http://localhost:3000
+pnpm build    # Build de producción (exportación estática)
+pnpm start    # Servidor de producción local
+pnpm lint     # Verificación de ESLint (0 errores, 0 advertencias)
+```
+
+---
+
+## 📬 Contacto
+
+**Julian Barberis** — Desarrollador de Software · Buenos Aires, Argentina
+
+- 📧 [jbarberis.tech@gmail.com](mailto:jbarberis.tech@gmail.com)
+- 💼 [linkedin.com/in/julian-barberis](https://linkedin.com/in/julian-barberis)
+- 🐙 [github.com/jbarberis](https://github.com/jbarberis)

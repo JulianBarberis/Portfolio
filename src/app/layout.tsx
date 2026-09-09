@@ -43,6 +43,43 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="dark scroll-smooth" suppressHydrationWarning>
+      <head>
+        {/*
+          Security headers via meta tags.
+          This project is a Next.js static export deployed on GitHub Pages,
+          so HTTP response headers cannot be set at the server level.
+          Meta-based headers provide best-effort CSP and anti-clickjacking protection.
+
+          CSP notes:
+          - 'unsafe-inline' for scripts is required by Next.js hydration chunks.
+          - 'unsafe-inline' for styles is required by Tailwind CSS v4 (runtime injection)
+            and Framer Motion (dynamic style attributes).
+          - All other directives are kept strict ('none' / 'self').
+        */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content={[
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline'",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: https:",
+            "font-src 'self' data:",
+            "connect-src 'self'",
+            "frame-src 'none'",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'none'",
+            "upgrade-insecure-requests",
+          ].join("; ")}
+        />
+        {/* Prevent MIME-type sniffing */}
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        {/* Control referrer information sent to external origins */}
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        {/* Belt-and-suspenders clickjacking protection alongside CSP frame-ancestors */}
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+      </head>
       <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <LanguageProvider>

@@ -104,6 +104,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <span>
                 {project.status === "live"
                   ? (language === "es" ? "En producción" : "Deployed in production")
+                  : project.status === "in_development"
+                  ? (language === "es" ? "Activamente en desarrollo" : "Actively in development")
                   : (language === "es" ? "En preparación para deploy cloud" : "Preparing cloud deploy")}
               </span>
             </div>

@@ -15,6 +15,33 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+
+  // Basic HTML-tag strip to prevent stored XSS if backend is added later
+  const sanitizeText = (value: string): string =>
+    value.replace(/<[^>]*>/g, "").trim();
+
+  const validateForm = (): boolean => {
+    const errors: { name?: string; email?: string; message?: string } = {};
+
+    const name = sanitizeText(formData.name);
+    const email = sanitizeText(formData.email);
+    const message = sanitizeText(formData.message);
+
+    if (!name || name.length < 2 || name.length > 100) {
+      errors.name = language === "es" ? "Nombre inválido (2–100 caracteres)." : "Invalid name (2–100 chars).";
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email) || email.length > 254) {
+      errors.email = language === "es" ? "Email inválido." : "Invalid email address.";
+    }
+    if (!message || message.length < 10 || message.length > 2000) {
+      errors.message = language === "es" ? "Mensaje inválido (10–2000 caracteres)." : "Invalid message (10–2000 chars).";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleCopyEmail = async () => {
     try {
@@ -28,7 +55,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
     setTimeout(() => {
@@ -43,9 +70,11 @@ export default function Contact() {
       });
 
       setFormData({ name: "", email: "", message: "" });
+      setFormErrors({});
       setTimeout(() => setSubmitted(false), 5000);
     }, 600);
   };
+
 
   return (
     <section id="contact" className="py-16 relative">
@@ -150,7 +179,7 @@ export default function Contact() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-3" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="contact-name" className="sr-only">{language === "es" ? "Tu nombre" : "Your name"}</label>
@@ -158,11 +187,17 @@ export default function Contact() {
                       id="contact-name"
                       type="text"
                       required
+                      maxLength={100}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={t(contact.formName)}
-                      className="w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f8559f] transition-all"
+                      aria-invalid={!!formErrors.name}
+                      aria-describedby={formErrors.name ? "error-name" : undefined}
+                      className={`w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 transition-all ${formErrors.name ? "focus-visible:ring-red-500 border-red-500/40" : "focus-visible:ring-[#f8559f]"}`}
                     />
+                    {formErrors.name && (
+                      <p id="error-name" role="alert" className="mt-1 text-[11px] text-red-500 font-semibold">{formErrors.name}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="contact-email" className="sr-only">{language === "es" ? "Tu email" : "Your email"}</label>
@@ -170,11 +205,17 @@ export default function Contact() {
                       id="contact-email"
                       type="email"
                       required
+                      maxLength={254}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder={t(contact.formEmail)}
-                      className="w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f8559f] transition-all"
+                      aria-invalid={!!formErrors.email}
+                      aria-describedby={formErrors.email ? "error-email" : undefined}
+                      className={`w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 transition-all ${formErrors.email ? "focus-visible:ring-red-500 border-red-500/40" : "focus-visible:ring-[#f8559f]"}`}
                     />
+                    {formErrors.email && (
+                      <p id="error-email" role="alert" className="mt-1 text-[11px] text-red-500 font-semibold">{formErrors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -184,11 +225,17 @@ export default function Contact() {
                     id="contact-message"
                     required
                     rows={3}
+                    maxLength={2000}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder={t(contact.formMessage)}
-                    className="w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f8559f] transition-all resize-none"
+                    aria-invalid={!!formErrors.message}
+                    aria-describedby={formErrors.message ? "error-message" : undefined}
+                    className={`w-full px-3.5 py-2 text-xs rounded-2xl apple-glass text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus-visible:ring-2 transition-all resize-none ${formErrors.message ? "focus-visible:ring-red-500 border-red-500/40" : "focus-visible:ring-[#f8559f]"}`}
                   />
+                  {formErrors.message && (
+                    <p id="error-message" role="alert" className="mt-1 text-[11px] text-red-500 font-semibold">{formErrors.message}</p>
+                  )}
                 </div>
 
                 <button

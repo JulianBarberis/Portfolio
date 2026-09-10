@@ -349,20 +349,8 @@ export const portfolioData: PortfolioData = {
         en: "Full-stack collaborative study platform with real-time party matchmaking, study rooms, enriched chat, and AI-generated quizzes from notes or PDF files. Features a competitive ELO system, gamified leagues, leaderboards, and skill trees built with NestJS, React, PostgreSQL and WebSockets.",
         es: "Plataforma full-stack de estudio colaborativo con matchmaking en tiempo real, salas de estudio (parties), chat enriquecido y quizzes/quests generados dinámicamente por IA a partir de apuntes o PDFs. Incluye sistema ELO competitivo, ligas gamificadas, leaderboards y árbol de habilidades — NestJS, React, PostgreSQL y WebSockets.",
       },
-      technologies: [
-        "NestJS",
-        "TypeScript",
-        "React 19",
-        "PostgreSQL",
-        "TypeORM",
-        "Socket.IO",
-        "Gemini AI",
-        "Zustand",
-        "Tailwind CSS",
-        "Docker",
-        "Vite",
-        "Framer Motion",
-      ],
+      technologies: ["NestJS", "TypeScript", "React 19", "PostgreSQL", "TypeORM", "Socket.IO", "Gemini AI", "Zustand", "Tailwind CSS", "Docker", "Vite", "Framer Motion"],
+      image: "/projects/studyquest.png",
       architectureHighlights: {
         en: [
           "Real-time WebSocket party rooms with Socket.IO — matchmaking, study sessions & live quiz sync.",
@@ -410,6 +398,7 @@ export const portfolioData: PortfolioData = {
         es: "Plataforma para compartir libros desarrollada con Kotlin, Spring Boot, React y PostgreSQL bajo principios DDD.",
       },
       technologies: ["Kotlin", "Spring Boot", "React", "PostgreSQL", "Flyway", "Docker", "JWT"],
+      image: "/projects/booklibre.png",
       architectureHighlights: {
         en: [
           "'BiblioKarma' dynamic user reputation scoring engine.",
@@ -439,8 +428,8 @@ export const portfolioData: PortfolioData = {
       category: "AI",
       year: "2025",
       featured: true,
-      status: "coming_soon",
-      demoUrl: undefined,
+      status: "live",
+      demoUrl: "https://sq-lify-sandy.vercel.app/",
       githubUrl: "https://github.com/JulianBarberis/SQLify",
       tagline: {
         en: "Natural Language to SQL Query Engine with Google Gemini AI",
@@ -451,6 +440,7 @@ export const portfolioData: PortfolioData = {
         es: "Aplicación full-stack en React, TypeScript, Express y MySQL que traduce preguntas a consultas SQL seguras con Gemini AI.",
       },
       technologies: ["React", "TypeScript", "Node.js", "Express", "Gemini AI", "MySQL"],
+      image: "/projects/sqlify.png",
       architectureHighlights: {
         en: [
           "Google Gemini AI pipeline with schema context injection.",
@@ -465,43 +455,12 @@ export const portfolioData: PortfolioData = {
       },
       roadmap: {
         en: [
-          "Packaging serverless API endpoints with database sandbox.",
-          "Deploying client and API to cloud hosting.",
+          "Live preview deployed to Vercel with serverless API integration.",
+          "Expanding AI schema introspection and multi-database support.",
         ],
         es: [
-          "Empaquetado serverless con sandbox de base de datos.",
-          "Despliegue de cliente y API en la nube.",
-        ],
-      },
-    },
-    {
-      id: "portfolio-gta6",
-      title: "Vice City Portfolio",
-      category: "Frontend",
-      year: "2026",
-      featured: true,
-      status: "live",
-      demoUrl: "https://JulianBarberis.github.io/portfolio/",
-      githubUrl: "https://github.com/JulianBarberis",
-      tagline: {
-        en: "Apple Glassmorphism Portfolio with GTA 6 Palette & GitHub Pages CI/CD",
-        es: "Portfolio estilo Apple Glass con paleta GTA 6 y CI/CD en GitHub Pages",
-      },
-      description: {
-        en: "Minimalist Apple-inspired glass portfolio built with Next.js 15, React 19, TypeScript, and Tailwind CSS with full EN/ES internationalization.",
-        es: "Portfolio minimalista estilo Apple Glass desarrollado con Next.js 15, React 19, TypeScript y Tailwind CSS con i18n EN/ES.",
-      },
-      technologies: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Apple Glass", "i18n"],
-      architectureHighlights: {
-        en: [
-          "Liquid Glass surfaces with specular hairline borders and multi-layer backdrop blur.",
-          "Static export architecture for automated zero-cost GitHub Pages hosting.",
-          "Bilingual context with localStorage theme and language persistence.",
-        ],
-        es: [
-          "Superficies Liquid Glass con bordes especulares y desenfoque multicapa.",
-          "Arquitectura de exportación estática para hosting gratuito en GitHub Pages.",
-          "Contexto bilingüe con persistencia de tema e idioma en localStorage.",
+          "Demo en vivo desplegada en Vercel con integración de API serverless.",
+          "Ampliando introspección de esquemas y soporte multibase de datos.",
         ],
       },
     },
@@ -523,6 +482,7 @@ export const portfolioData: PortfolioData = {
         es: "Proyecto académico para la materia Algoritmos 2 y 3 de la UNSAM. Implementa un sistema completo de gestión de pedidos aplicando estructuras de datos avanzadas (árboles, heaps, grafos) y paradigmas algorítmicos como greedy, programación dinámica y backtracking para resolver problemas reales de pedidos y ruteo.",
       },
       technologies: ["Kotlin", "Data Structures", "Graphs", "Algorithms", "OOP", "UNSAM"],
+      image: "/projects/algo-que-pedir.png",
       architectureHighlights: {
         en: [
           "Advanced data structures: trees, heaps, priority queues and graph representations.",

@@ -77,7 +77,7 @@ export default function CoverflowCarousel({
   return (
     <div
       ref={stageRef}
-      className="relative w-full h-[540px] sm:h-[490px] flex items-center justify-center select-none touch-pan-y overflow-visible"
+      className="relative w-full h-[570px] sm:h-[530px] flex items-center justify-center select-none touch-pan-y overflow-visible"
       style={{
         perspective: shouldReduceMotion ? undefined : 1000,
         transformStyle: "preserve-3d",

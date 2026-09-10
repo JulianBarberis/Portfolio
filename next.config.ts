@@ -29,20 +29,21 @@ const securityHeaders = [
   {
     // CSP note: 'unsafe-inline' for scripts/styles is required by
     // Next.js hydration and Tailwind CSS v4 / Framer Motion.
+    // In development mode, 'unsafe-eval' is required by React for callstack reconstruction & Turbopack.
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline'",
+      `script-src 'self' 'unsafe-inline'${!isProd ? " 'unsafe-eval'" : ""}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https:",
       "font-src 'self' data:",
-      "connect-src 'self'",
+      `connect-src 'self'${!isProd ? " ws: wss: http://localhost:* ws://localhost:*" : ""}`,
       "frame-src 'none'",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
-      "upgrade-insecure-requests",
+      ...(isProd ? ["upgrade-insecure-requests"] : []),
     ].join("; "),
   },
   {

@@ -1,122 +1,38 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import { ProjectItem } from "@/data/types";
 import ProjectModal from "./ProjectModal";
-import TechIcon from "./TechIcon";
 import CoverflowCarousel from "./carousel/CoverflowCarousel";
 import CarouselControls from "./carousel/CarouselControls";
 import EmptyCategory from "./carousel/EmptyCategory";
 import { FolderGit2 } from "lucide-react";
 
 function ProjectVisualHeader({ project }: { project: ProjectItem }) {
-  if (
-    project.id === "booklibre" ||
-    project.id === "biblioteca-comunitaria" ||
-    project.title.toLowerCase().includes("book")
-  ) {
+  if (project.image) {
     return (
-      <div className="h-28 rounded-2xl bg-black/30 dark:bg-black/50 border border-white/10 p-3.5 flex flex-col justify-between font-mono text-[11px] overflow-hidden relative group-hover:border-[#f8559f]/40 transition-colors shadow-inner">
-        <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
-          <span className="text-[#7F52FF] flex items-center gap-1.5 font-bold">
-            <TechIcon name="Kotlin" className="w-3.5 h-3.5" />
-            <span>BookLibre.kt</span>
-          </span>
-          <span className="px-2 py-0.5 rounded-full bg-[#f8559f]/15 text-[#f8559f] text-[9px] font-bold">
-            DDD CORE
-          </span>
-        </div>
-        <div className="space-y-0.5 font-mono text-[11px]">
-          <p className="text-[var(--text-secondary)] truncate">
-            <span className="text-[#3744bd] dark:text-[#93c5fd]">val</span> karma = calculateKarma(user)
-          </p>
-          <p className="text-[var(--text-muted)] text-[10px] truncate">
-            @Transactional fun reserveBook(isbn)
-          </p>
-        </div>
-        <div className="flex items-center gap-2 text-[10px] text-[var(--text-muted)] pt-1.5 border-t border-white/5">
-          <span className="text-[#6DB33F] flex items-center gap-1 font-semibold">
-            <TechIcon name="Spring Boot" className="w-3 h-3" /> Spring Boot
-          </span>
-          <span>•</span>
-          <span className="text-[#4169E1] flex items-center gap-1 font-semibold">
-            <TechIcon name="PostgreSQL" className="w-3 h-3" /> PostgreSQL
-          </span>
-        </div>
+      <div className="relative w-full h-36 sm:h-40 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 group-hover:border-[#f8559f]/50 transition-all duration-300 shadow-md bg-black/40">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          priority={project.featured}
+        />
+        {/* Subtle gradient overlay to enhance visual depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none" />
       </div>
     );
   }
 
-  if (project.id === "sqlify") {
-    return (
-      <div className="h-28 rounded-2xl bg-black/30 dark:bg-black/50 border border-white/10 p-3.5 flex flex-col justify-between font-mono text-[11px] overflow-hidden relative group-hover:border-[#06B6D4]/40 transition-colors shadow-inner">
-        <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
-          <span className="text-[#06B6D4] flex items-center gap-1.5 font-bold">
-            <TechIcon name="Gemini AI API" className="w-3.5 h-3.5" />
-            <span>prompt_to_sql.ai</span>
-          </span>
-          <span className="px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 text-[9px] font-bold">
-            NL2SQL
-          </span>
-        </div>
-        <div className="space-y-0.5 font-mono text-[11px]">
-          <p className="text-[var(--text-muted)] text-[10px] truncate">
-            &gt; &quot;Top 5 clientes con más órdenes&quot;
-          </p>
-          <p className="text-cyan-300 font-semibold text-[10px] truncate">
-            SELECT name, COUNT(*) FROM orders...
-          </p>
-        </div>
-        <div className="flex items-center gap-2 text-[10px] text-[var(--text-muted)] pt-1.5 border-t border-white/5">
-          <span className="text-[#3178C6] flex items-center gap-1 font-semibold">
-            <TechIcon name="TypeScript" className="w-3 h-3" /> TypeScript
-          </span>
-          <span>•</span>
-          <span className="text-[#4479A1] flex items-center gap-1 font-semibold">
-            <TechIcon name="MySQL" className="w-3 h-3" /> MySQL
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  // Default / Vice City Portfolio
   return (
-    <div className="h-28 rounded-2xl bg-black/30 dark:bg-black/50 border border-white/10 p-3.5 flex flex-col justify-between font-mono text-[11px] overflow-hidden relative group-hover:border-[#f8559f]/40 transition-colors shadow-inner">
-      <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
-        <span className="text-[#f8559f] flex items-center gap-1.5 font-bold">
-          <TechIcon name="Next.js" className="w-3.5 h-3.5" />
-          <span>vice_city.glass</span>
-        </span>
-        <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[9px] font-bold flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          STATIC
-        </span>
-      </div>
-      <div className="space-y-1 font-mono text-[11px]">
-        <div className="flex items-center gap-1.5">
-          <span className="px-2 py-0.5 rounded-md bg-[#f8559f]/20 text-[#f8559f] text-[9px] font-bold">
-            GTA VI Sunset
-          </span>
-          <span className="px-2 py-0.5 rounded-md apple-glass text-[9px] text-[var(--text-primary)]">
-            Apple Glass
-          </span>
-        </div>
-        <p className="text-[var(--text-muted)] text-[10px] truncate">
-          0 useEffect • Turbopack Optimized
-        </p>
-      </div>
-      <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] pt-1.5 border-t border-white/5">
-        <span className="text-[#06B6D4] flex items-center gap-1 font-semibold">
-          <TechIcon name="Tailwind CSS" className="w-3 h-3" /> Tailwind
-        </span>
-        <span className="text-[var(--text-secondary)] font-semibold">
-          GitHub Pages CI/CD
-        </span>
-      </div>
+    <div className="h-36 sm:h-40 rounded-2xl bg-black/30 dark:bg-black/50 border border-white/10 p-3.5 flex items-center justify-center font-mono text-xs text-[var(--text-muted)]">
+      <span>{project.title}</span>
     </div>
   );
 }
@@ -128,7 +44,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   const projects = portfolioData.projects;
-  const categories = ["All", "Full-Stack", "Backend", "Frontend", "AI"];
+  const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
 
   const filteredProjects = projects.filter((proj) => {
     if (activeCategory === "All") return true;

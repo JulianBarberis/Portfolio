@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { ProjectItem } from "@/data/types";
 import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
@@ -67,6 +68,20 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <X className="w-4 h-4" />
           </button>
         </div>
+
+        {/* Project Screenshot Banner */}
+        {project.image && (
+          <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-lg bg-black/40">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 700px"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+          </div>
+        )}
 
         {/* Overview */}
         <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">

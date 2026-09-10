@@ -3,7 +3,7 @@
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
-import { Briefcase, Calendar, MapPin, CheckCircle, DraftingCompass } from "lucide-react";
+import { Briefcase, Calendar, CheckCircle } from "lucide-react";
 
 export default function Experience() {
   const { language, t, tArr } = useLanguage();

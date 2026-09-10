@@ -24,7 +24,7 @@ const securityHeaders = [
   },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
   },
   {
     // CSP note: 'unsafe-inline' for scripts/styles is required by
@@ -34,9 +34,9 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${!isProd ? " 'unsafe-eval'" : ""}`,
-      "style-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: https:",
-      "font-src 'self' data:",
+      "font-src 'self' data: https://fonts.gstatic.com",
       `connect-src 'self'${!isProd ? " ws: wss: http://localhost:* ws://localhost:*" : ""}`,
       "frame-src 'none'",
       "object-src 'none'",

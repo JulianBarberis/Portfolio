@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ProjectItem } from "@/data/types";
 import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
+import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -150,7 +151,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Actions */}
         <div className="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between gap-3">
           <a
-            href={project.githubUrl}
+            href={sanitizeExternalUrl(project.githubUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/40 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f]"
@@ -159,9 +160,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <span>GitHub</span>
           </a>
 
-          {project.demoUrl ? (
+          {project.demoUrl && isSafeExternalUrl(project.demoUrl) ? (
             <a
-              href={project.demoUrl}
+              href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-md shadow-[#f8559f]/25 focus-visible:ring-2 focus-visible:ring-[#f8559f]"

@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import TechIcon from "@/components/TechIcon";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
 import { ExternalLink, Rocket, Clock } from "lucide-react";
+import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -92,7 +93,7 @@ export default function ProjectCard({
         }`}
       >
         <a
-          href={project.githubUrl}
+          href={sanitizeExternalUrl(project.githubUrl)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`GitHub for ${project.title}`}
@@ -117,9 +118,9 @@ export default function ProjectCard({
           </button>
 
           {/* External Live Demo Link when available */}
-          {isLive && project.demoUrl && (
+          {isLive && project.demoUrl && isSafeExternalUrl(project.demoUrl) && (
             <a
-              href={project.demoUrl}
+              href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Live demo for ${project.title}`}

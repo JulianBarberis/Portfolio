@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import confetti from "canvas-confetti";
-import { Mail, Send, Copy, Check, MapPin, Clock, Sparkles } from "lucide-react";
+import { Mail, Send, Copy, Check, MapPin, Sparkles } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
 
 export default function Contact() {
@@ -17,9 +17,12 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
-  // Basic HTML-tag strip to prevent stored XSS if backend is added later
+  // Strips HTML tags, control characters, and trims whitespace
   const sanitizeText = (value: string): string =>
-    value.replace(/<[^>]*>/g, "").trim();
+    value
+      .replace(/[\x00-\x1F\x7F]/g, "")
+      .replace(/<[^>]*>?/gm, "")
+      .trim();
 
   const validateForm = (): boolean => {
     const errors: { name?: string; email?: string; message?: string } = {};

@@ -81,7 +81,7 @@ test("Magnetic Snap Decision Function (Thresholds: dx > 50px, vx > 400px/s)", ()
 });
 
 test("Fluid Dynamic Centering & Track Offset Math", () => {
-  function computeFluidGeometry(containerWidth, activeIndex, totalCards) {
+  function computeFluidGeometry(containerWidth, activeIndex) {
     let cardWidth = 420;
     let gap = 24;
 
@@ -346,7 +346,6 @@ test("Mobile Viewport Step & Card Containment (Screen: 360px)", () => {
   // side cards neatly visible without pushing cards offscreen or creating invisible clippings
   const screenWidth = 360;
   const step = 130;
-  const cardWidth = Math.min(screenWidth * 0.82, 320); // 295.2px
 
   const centerPos = screenWidth / 2; // 180px
   const leftCardCenter = centerPos - step; // 50px

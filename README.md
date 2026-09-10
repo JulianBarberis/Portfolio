@@ -1,40 +1,49 @@
-# Julian Barberis — Portfolio de Desarrollador de Software
+# Julian Barberis — Software Developer Portfolio
 
-> Portfolio profesional bilingüe (Español / Inglés) con modo oscuro y claro, construido con **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4** y **Framer Motion**. Desplegado automáticamente en **GitHub Pages** mediante GitHub Actions.
+[![Deploy](https://github.com/JulianBarberis/Portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/JulianBarberis/Portfolio/actions/workflows/deploy.yml)
+[![Next.js](https://img.shields.io/badge/Next.js-16.3-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
+
+> Portfolio profesional bilingüe (Español / Inglés) de alto rendimiento con modo oscuro y claro, construido con **Next.js 16 (Turbopack)**, **React 19**, **TypeScript**, **Tailwind CSS v4** y **Framer Motion**. Desplegado automáticamente en **GitHub Pages**.
+
+🌐 **Sitio en vivo:** [https://julianbarberis.github.io/Portfolio/](https://julianbarberis.github.io/Portfolio/)
 
 ---
 
 ## ✨ Características Principales
 
 ### 🎨 Diseño & Experiencia Visual
-- **Modo Oscuro / Claro** con paleta Apple Glassmorphism: obsidiana profunda (`#05060d`), azul twilight (`#3744bd`) y rosa eléctrico (`#f8559f`), con persistencia en `localStorage`.
-- **Superficies Apple Glass** con `backdrop-filter: blur(24px) saturate(190%)`, bordes especulares de 1px y sombras líquidas multicapa.
-- **Microinteracciones** con física de resorte (`Framer Motion`): pastillas deslizantes, ciclo de subtítulos cinético y transiciones de layout animadas.
-- **Contraste WCAG 2.1 AA** verificado matemáticamente en ambos modos.
+- **Modo Oscuro / Claro** con paleta Apple Glassmorphism: obsidiana profunda (`#05060d`), azul twilight (`#3744bd`) y rosa eléctrico (`#f8559f`), con persistencia en `localStorage` sin parpadeo (FOUC).
+- **Superficies Apple Glass** con `backdrop-filter: blur(24px) saturate(190%)`, bordes especulares y sombras líquidas dinámicas.
+- **Microinteracciones** con física de resorte (`Framer Motion`): pastillas deslizantes, ciclo de subtítulos cinético y transiciones animadas fluidas.
+- **Accesibilidad**: Contraste verificado según **WCAG 2.1 AA** en ambos modos y navegación completa por teclado.
 
 ### 🌐 Internacionalización (EN / ES)
-- Cambio de idioma en tiempo real desde la barra de navegación.
-- Traducciones completas en cada sección: Hero, Sobre mí, Experiencia, Educación, Habilidades, Proyectos y Contacto.
-- Toda la información personal y de proyectos centralizada en [`src/data/portfolioData.ts`](src/data/portfolioData.ts).
+- Cambio de idioma instantáneo en tiempo real sin recarga.
+- Traducciones completas en cada sección: Hero, Sobre mí, Experiencia, Habilidades, Proyectos y Contacto.
+- Toda la información desacoplada y centralizada en [`src/data/portfolioData.ts`](src/data/portfolioData.ts).
 
 ### 🗂️ Secciones del Portfolio
 | Sección | Descripción |
 |---|---|
-| **Hero** | Presentación con jerarquía tipográfica de alto impacto, badge de disponibilidad pulsante y tarjeta bento de arquitectura técnica |
-| **Sobre mí** | Formación académica (UNSAM y Coderhouse), foto de perfil e historial educativo |
-| **Experiencia** | Bento grid de trayectoria técnica: de proyectista eléctrico CAD a desarrollador de software con Clean Architecture |
-| **Habilidades** | Matriz interactiva filtrable por categoría con iconos SVG de marca auténticos |
-| **Proyectos** | Carrusel dual (modo Fluido con física magnética / modo Coverflow 3D) con modales de arquitectura detallados |
-| **Contacto** | Formulario interactivo con validación, copia al portapapeles y animación confetti |
+| **Hero** | Presentación de alto impacto con badge de disponibilidad pulsante y tarjeta bento de arquitectura técnica |
+| **Sobre mí** | Perfil profesional, formación académica (UNSAM, Coderhouse) y trayectoria |
+| **Experiencia** | Bento grid con línea de tiempo y transición de proyectista eléctrico CAD a desarrollador de software con Clean Architecture |
+| **Habilidades** | Matriz interactiva de tecnologías con filtrado por categoría e íconos de marca |
+| **Proyectos** | Carrusel dual (modo Fluido con física magnética / modo Coverflow 3D) con modales de arquitectura detallados y enlaces seguros |
+| **Contacto** | Formulario interactivo con saneamiento de entradas, copia rápida al portapapeles y animación confetti |
 
 ### 🛠️ Stack Tecnológico
 | Capa | Tecnologías |
 |---|---|
-| **Framework** | Next.js 16.3 (App Router, exportación estática) |
+| **Framework** | Next.js 16.3 (App Router, exportación estática con Turbopack) |
 | **UI** | React 19, Tailwind CSS v4, Framer Motion |
-| **Lenguaje** | TypeScript estricto |
+| **Lenguaje** | TypeScript 5.9 (modo estricto) |
 | **Tipografía** | Inter (`--font-sans`) + JetBrains Mono (`--font-mono`) vía `next/font/google` |
 | **Íconos** | `react-icons/si`, Lucide React |
+| **Seguridad** | Doble capa CSP (headers + meta tags), sanitización WHATWG de URLs y headers HTTP estrictos |
 | **Deploy** | GitHub Actions → GitHub Pages |
 
 ---
@@ -43,8 +52,8 @@
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/jbarberis/portfolio.git
-cd portfolio
+git clone https://github.com/JulianBarberis/Portfolio.git
+cd Portfolio
 
 # 2. Instalar dependencias (requiere pnpm)
 pnpm install
@@ -52,8 +61,11 @@ pnpm install
 # 3. Iniciar el servidor de desarrollo
 pnpm dev
 
-# 4. Abrir en el navegador
-# http://localhost:3000
+# 4. Compilar para producción (exportación estática)
+pnpm build
+
+# 5. Ejecutar linter
+pnpm lint
 ```
 
 > **Requisitos:** Node.js ≥ 20 y pnpm ≥ 9.
@@ -91,87 +103,12 @@ src/
 
 ---
 
-## ⚙️ Personalización del Contenido
-
-Todo el contenido bilingüe está centralizado en un único archivo de configuración:
-
-📁 **[`src/data/portfolioData.ts`](src/data/portfolioData.ts)**
-
-### Agregar o actualizar un proyecto
-
-```ts
-{
-  id: "mi-nuevo-proyecto",
-  title: "Nombre del Proyecto",
-  category: "Full-Stack", // "Full-Stack" | "Backend" | "Frontend" | "AI"
-  year: "2026",
-  featured: true,
-  status: "live",          // "live" | "coming_soon" | "in_development"
-  demoUrl: "https://mi-demo.com",     // undefined si el deploy está pendiente
-  githubUrl: "https://github.com/jbarberis/mi-proyecto",
-  tagline: {
-    en: "Short English tagline",
-    es: "Descripción corta en español",
-  },
-  description: {
-    en: "Detailed English description...",
-    es: "Descripción detallada en español...",
-  },
-  technologies: ["Kotlin", "Spring Boot", "React", "PostgreSQL", "Docker"],
-  architectureHighlights: {
-    en: ["Key technical feature 1", "Key technical feature 2"],
-    es: ["Característica técnica clave 1", "Característica técnica clave 2"],
-  },
-  roadmap: {
-    en: ["Step 1: Containerize API", "Step 2: Deploy to cloud"],
-    es: ["Paso 1: Contenerizar API", "Paso 2: Desplegar en la nube"],
-  }
-}
-```
-
----
-
-## 🌍 Deploy en GitHub Pages (Gratis y Automatizado)
-
-El repositorio incluye un workflow de GitHub Actions listo para usar en `.github/workflows/deploy.yml`.
-
-### Pasos para desplegar
-
-1. **Subir el código a GitHub:**
-   ```bash
-   git add .
-   git commit -m "feat: primer despliegue del portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<tu-usuario>/<tu-repo>.git
-   git push -u origin main
-   ```
-
-2. **Habilitar GitHub Pages en el repositorio:**
-   - Ir a **Settings → Pages** (barra lateral izquierda).
-   - En **Build and deployment → Source**, seleccionar **GitHub Actions**.
-
-3. **¡Listo!** El workflow construirá el sitio estático y lo publicará automáticamente en:
-   ```
-   https://<tu-usuario>.github.io/<tu-repo>/
-   ```
-
----
-
-## 🔧 Scripts Disponibles
-
-```bash
-pnpm dev      # Servidor de desarrollo en http://localhost:3000
-pnpm build    # Build de producción (exportación estática)
-pnpm start    # Servidor de producción local
-pnpm lint     # Verificación de ESLint (0 errores, 0 advertencias)
-```
-
----
-
-## 📬 Contacto
+## 📬 Contacto & Redes
 
 **Julian Barberis** — Desarrollador de Software · Buenos Aires, Argentina
 
-- 📧 [jbarberis.tech@gmail.com](mailto:jbarberis.tech@gmail.com)
-- 💼 [linkedin.com/in/julian-barberis](https://linkedin.com/in/julian-barberis)
-- 🐙 [github.com/jbarberis](https://github.com/jbarberis)
+- 🌐 **Portfolio:** [julianbarberis.github.io/Portfolio](https://julianbarberis.github.io/Portfolio/)
+- 💼 **LinkedIn:** [linkedin.com/in/julian-barberis](https://www.linkedin.com/in/julian-barberis/)
+- 🐙 **GitHub:** [github.com/JulianBarberis](https://github.com/JulianBarberis)
+- 📧 **Email:** [jbarberis.tech@gmail.com](mailto:jbarberis.tech@gmail.com)
+

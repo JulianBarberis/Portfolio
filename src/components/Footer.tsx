@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
 
 export default function Footer() {
-  const { language, t } = useLanguage();
-  const { personal, navigation } = portfolioData;
+  const { personal } = portfolioData;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

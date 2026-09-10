@@ -68,7 +68,7 @@ pnpm build
 pnpm lint
 ```
 
-> **Requisitos:** Node.js ≥ 20 y pnpm ≥ 9.
+> **Requisitos:** Node.js ≥ 22.13 y pnpm ≥ 11.
 
 ---
 

@@ -40,3 +40,25 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI assistants, agents and LLM toolchain
+.agents/
+.agents/**
+.cursor/
+.cursorrules
+.claude/
+.gemini/
+.windsurf/
+.copilot/
+.brain/
+.system_generated/
+AGENTS.md
+CLAUDE.md
+*_SKILL.md
+.agents
+
+# security audit
+SECURITY_AUDIT.md
+test/*security*
+test/*challenger*
+

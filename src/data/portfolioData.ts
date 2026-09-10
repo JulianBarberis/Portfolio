@@ -47,8 +47,8 @@ export const portfolioData: PortfolioData = {
       ],
     },
     social: {
-      github: "https://github.com/jbarberis",
-      linkedin: "https://linkedin.com/in/julian-barberis",
+      github: "https://github.com/JulianBarberis",
+      linkedin: "https://www.linkedin.com/in/julian-barberis/",
       email: "mailto:jbarberis.tech@gmail.com",
     },
     stats: [
@@ -333,6 +333,54 @@ export const portfolioData: PortfolioData = {
   ],
   projects: [
     {
+      id: "studyquest",
+      title: "StudyQuest",
+      category: "Full-Stack",
+      year: "2026",
+      featured: true,
+      status: "in_development",
+      demoUrl: undefined,
+      githubUrl: "https://github.com/LorenGrz/StudyQuest",
+      tagline: {
+        en: "Collaborative Study Platform with Real-Time Matchmaking & AI-Generated Quests",
+        es: "Plataforma de estudio colaborativo con matchmaking en tiempo real y quests generados por IA",
+      },
+      description: {
+        en: "Full-stack collaborative study platform with real-time party matchmaking, study rooms, enriched chat, and AI-generated quizzes from notes or PDF files. Features a competitive ELO system, gamified leagues, leaderboards, and skill trees built with NestJS, React, PostgreSQL and WebSockets.",
+        es: "Plataforma full-stack de estudio colaborativo con matchmaking en tiempo real, salas de estudio (parties), chat enriquecido y quizzes/quests generados dinámicamente por IA a partir de apuntes o PDFs. Incluye sistema ELO competitivo, ligas gamificadas, leaderboards y árbol de habilidades — NestJS, React, PostgreSQL y WebSockets.",
+      },
+      technologies: ["NestJS", "TypeScript", "React 19", "PostgreSQL", "TypeORM", "Socket.IO", "Gemini AI", "Zustand", "Tailwind CSS", "Docker", "Vite", "Framer Motion"],
+      image: "/projects/studyquest.png",
+      architectureHighlights: {
+        en: [
+          "Real-time WebSocket party rooms with Socket.IO — matchmaking, study sessions & live quiz sync.",
+          "AI quest generation pipeline: PDF → MarkItDown sidecar → Google Gemini 2.5 Flash → structured trivia.",
+          "Competitive ELO rating engine with leagues, win rates, activity streaks & unlockable badge system.",
+          "Clean decoupled architecture: NestJS backend + React SPA + PostgreSQL with ACID-compliant XP/ELO transactions.",
+          "Zustand 5 lightweight state management with Recharts data visualization and Framer Motion animations.",
+        ],
+        es: [
+          "Salas en tiempo real con WebSockets (Socket.IO) — matchmaking, sesiones de estudio y sincronización de quizzes en vivo.",
+          "Pipeline de generación de quests con IA: PDF → sidecar MarkItDown → Google Gemini 2.5 Flash → trivia estructurada.",
+          "Motor ELO competitivo con ligas, win rates, rachas de actividad y sistema de medallas desbloqueables.",
+          "Arquitectura desacoplada limpia: backend NestJS + SPA React + PostgreSQL con transacciones ACID para XP y ELO.",
+          "Estado global ligero con Zustand 5, visualización de datos con Recharts y animaciones con Framer Motion.",
+        ],
+      },
+      roadmap: {
+        en: [
+          "Cloud container deployment (Render / Railway) for backend API and PostgreSQL.",
+          "Frontend deployment to Vercel with environment-based API URL injection.",
+          "Tournaments module and real-time leaderboard refresh via WebSockets.",
+        ],
+        es: [
+          "Despliegue en contenedores cloud (Render / Railway) para API backend y PostgreSQL.",
+          "Despliegue del frontend en Vercel con inyección de URL de API por entorno.",
+          "Módulo de torneos y actualización en tiempo real del leaderboard vía WebSockets.",
+        ],
+      },
+    },
+    {
       id: "booklibre",
       title: "BookLibre",
       category: "Full-Stack",
@@ -340,7 +388,7 @@ export const portfolioData: PortfolioData = {
       featured: true,
       status: "coming_soon",
       demoUrl: undefined,
-      githubUrl: "https://github.com/jbarberis",
+      githubUrl: "https://github.com/JulianBarberis",
       tagline: {
         en: "DDD-driven Book Sharing Platform with Gamified Engine",
         es: "Plataforma de libros basada en DDD con motor de reputación",
@@ -350,6 +398,7 @@ export const portfolioData: PortfolioData = {
         es: "Plataforma para compartir libros desarrollada con Kotlin, Spring Boot, React y PostgreSQL bajo principios DDD.",
       },
       technologies: ["Kotlin", "Spring Boot", "React", "PostgreSQL", "Flyway", "Docker", "JWT"],
+      image: "/projects/booklibre.png",
       architectureHighlights: {
         en: [
           "'BiblioKarma' dynamic user reputation scoring engine.",
@@ -379,9 +428,9 @@ export const portfolioData: PortfolioData = {
       category: "AI",
       year: "2025",
       featured: true,
-      status: "coming_soon",
-      demoUrl: undefined,
-      githubUrl: "https://github.com/jbarberis",
+      status: "live",
+      demoUrl: "https://sq-lify-sandy.vercel.app/",
+      githubUrl: "https://github.com/JulianBarberis/SQLify",
       tagline: {
         en: "Natural Language to SQL Query Engine with Google Gemini AI",
         es: "Traductor de lenguaje natural a SQL con Google Gemini AI",
@@ -391,6 +440,7 @@ export const portfolioData: PortfolioData = {
         es: "Aplicación full-stack en React, TypeScript, Express y MySQL que traduce preguntas a consultas SQL seguras con Gemini AI.",
       },
       technologies: ["React", "TypeScript", "Node.js", "Express", "Gemini AI", "MySQL"],
+      image: "/projects/sqlify.png",
       architectureHighlights: {
         en: [
           "Google Gemini AI pipeline with schema context injection.",
@@ -405,43 +455,44 @@ export const portfolioData: PortfolioData = {
       },
       roadmap: {
         en: [
-          "Packaging serverless API endpoints with database sandbox.",
-          "Deploying client and API to cloud hosting.",
+          "Live preview deployed to Vercel with serverless API integration.",
+          "Expanding AI schema introspection and multi-database support.",
         ],
         es: [
-          "Empaquetado serverless con sandbox de base de datos.",
-          "Despliegue de cliente y API en la nube.",
+          "Demo en vivo desplegada en Vercel con integración de API serverless.",
+          "Ampliando introspección de esquemas y soporte multibase de datos.",
         ],
       },
     },
     {
-      id: "portfolio-gta6",
-      title: "Vice City Portfolio",
-      category: "Frontend",
-      year: "2026",
+      id: "algo-que-pedir",
+      title: "AlgoQuePedir",
+      category: "Backend",
+      year: "2025",
       featured: true,
       status: "live",
-      demoUrl: "https://jbarberis.github.io/portfolio/",
-      githubUrl: "https://github.com/jbarberis",
+      demoUrl: undefined,
+      githubUrl: "https://github.com/JulianBarberis/JulianBarberis-AlgoQuePedir_Algoritmos2y3",
       tagline: {
-        en: "Apple Glassmorphism Portfolio with GTA 6 Palette & GitHub Pages CI/CD",
-        es: "Portfolio estilo Apple Glass con paleta GTA 6 y CI/CD en GitHub Pages",
+        en: "Order Management System with Advanced Data Structures — UNSAM Algorithms 2 & 3",
+        es: "Sistema de gestión de pedidos con estructuras de datos avanzadas — Algoritmos 2 y 3 UNSAM",
       },
       description: {
-        en: "Minimalist Apple-inspired glass portfolio built with Next.js 15, React 19, TypeScript, and Tailwind CSS with full EN/ES internationalization.",
-        es: "Portfolio minimalista estilo Apple Glass desarrollado con Next.js 15, React 19, TypeScript y Tailwind CSS con i18n EN/ES.",
+        en: "Academic project for the Algorithms 2 & 3 course at UNSAM. Implements a full order management system applying advanced data structures (trees, heaps, graphs) and algorithmic paradigms such as greedy, dynamic programming, and backtracking to solve real-world ordering and routing problems.",
+        es: "Proyecto académico para la materia Algoritmos 2 y 3 de la UNSAM. Implementa un sistema completo de gestión de pedidos aplicando estructuras de datos avanzadas (árboles, heaps, grafos) y paradigmas algorítmicos como greedy, programación dinámica y backtracking para resolver problemas reales de pedidos y ruteo.",
       },
-      technologies: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Apple Glass", "i18n"],
+      technologies: ["Kotlin", "Data Structures", "Graphs", "Algorithms", "OOP", "UNSAM"],
+      image: "/projects/algo-que-pedir.png",
       architectureHighlights: {
         en: [
-          "Liquid Glass surfaces with specular hairline borders and multi-layer backdrop blur.",
-          "Static export architecture for automated zero-cost GitHub Pages hosting.",
-          "Bilingual context with localStorage theme and language persistence.",
+          "Advanced data structures: trees, heaps, priority queues and graph representations.",
+          "Algorithmic paradigms: greedy heuristics, dynamic programming and backtracking strategies.",
+          "Object-oriented design with clean separation of domain entities and algorithm logic.",
         ],
         es: [
-          "Superficies Liquid Glass con bordes especulares y desenfoque multicapa.",
-          "Arquitectura de exportación estática para hosting gratuito en GitHub Pages.",
-          "Contexto bilingüe con persistencia de tema e idioma en localStorage.",
+          "Estructuras de datos avanzadas: árboles, heaps, colas de prioridad y representaciones de grafos.",
+          "Paradigmas algorítmicos: heurísticas greedy, programación dinámica y estrategias de backtracking.",
+          "Diseño orientado a objetos con separación limpia entre entidades de dominio y lógica algorítmica.",
         ],
       },
     },

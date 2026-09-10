@@ -142,15 +142,12 @@ stress("Coverflow Monotonic Z-Depth and Opacity Attenuation", () => {
 stress("Reduced Motion Invariant Enforcement", () => {
   const shouldReduceMotion = true;
   const offsets = [-2, -1, 0, 1, 2];
-  const step = 260;
 
   for (const o of offsets) {
     const isCenter = o === 0;
-    const x = o * (step + 40);
     const z = shouldReduceMotion ? 0 : 40;
     const rotateY = shouldReduceMotion ? 0 : 35;
     const scale = isCenter ? 1 : 0.92;
-    const opacity = isCenter ? 1 : 0.6;
     const blur = shouldReduceMotion ? "0px" : "1.5px";
 
     // When reduced motion is on:

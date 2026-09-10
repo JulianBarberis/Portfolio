@@ -44,7 +44,7 @@ function getThemeServerSnapshot(): Theme {
 }
 
 // Client mounted external store (pure useSyncExternalStore pattern)
-function subscribeMounted(callback: () => void) {
+function subscribeMounted() {
   return () => {};
 }
 function getMountedSnapshot(): boolean {

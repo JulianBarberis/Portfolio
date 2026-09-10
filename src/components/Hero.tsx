@@ -3,13 +3,12 @@
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
-import { ArrowRight, Mail, Sparkles, MapPin, Cpu, Terminal, Layers, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Cpu, Terminal, Layers, CheckCircle2 } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
 
 export default function Hero() {
-  const { language, t, tArr } = useLanguage();
+  const { language, t } = useLanguage();
   const { personal } = portfolioData;
-  const subtitles = tArr(personal.subtitles);
 
   return (
     <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center pt-20 pb-12 overflow-hidden">

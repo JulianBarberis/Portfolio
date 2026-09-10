@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { ProjectItem } from "@/data/types";
 import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
+import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -68,6 +70,20 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </button>
         </div>
 
+        {/* Project Screenshot Banner */}
+        {project.image && (
+          <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-lg bg-black/40">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 700px"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+          </div>
+        )}
+
         {/* Overview */}
         <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
           {t(project.description)}
@@ -104,6 +120,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <span>
                 {project.status === "live"
                   ? (language === "es" ? "En producción" : "Deployed in production")
+                  : project.status === "in_development"
+                  ? (language === "es" ? "Activamente en desarrollo" : "Actively in development")
                   : (language === "es" ? "En preparación para deploy cloud" : "Preparing cloud deploy")}
               </span>
             </div>
@@ -133,7 +151,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Actions */}
         <div className="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between gap-3">
           <a
-            href={project.githubUrl}
+            href={sanitizeExternalUrl(project.githubUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/40 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f]"
@@ -142,9 +160,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <span>GitHub</span>
           </a>
 
-          {project.demoUrl ? (
+          {project.demoUrl && isSafeExternalUrl(project.demoUrl) ? (
             <a
-              href={project.demoUrl}
+              href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-md shadow-[#f8559f]/25 focus-visible:ring-2 focus-visible:ring-[#f8559f]"

@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import TechIcon from "@/components/TechIcon";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
 import { ExternalLink, Rocket, Clock } from "lucide-react";
+import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -43,10 +44,15 @@ export default function ProjectCard({
             {project.category}
           </span>
 
-          {isLive ? (
+          {project.status === "live" ? (
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <span>{language === "es" ? "En Producción" : "Live"}</span>
+            </span>
+          ) : project.status === "in_development" ? (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+              <span>{language === "es" ? "En Desarrollo" : "In Dev"}</span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
@@ -87,7 +93,7 @@ export default function ProjectCard({
         }`}
       >
         <a
-          href={project.githubUrl}
+          href={sanitizeExternalUrl(project.githubUrl)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`GitHub for ${project.title}`}
@@ -112,9 +118,9 @@ export default function ProjectCard({
           </button>
 
           {/* External Live Demo Link when available */}
-          {isLive && project.demoUrl && (
+          {isLive && project.demoUrl && isSafeExternalUrl(project.demoUrl) && (
             <a
-              href={project.demoUrl}
+              href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Live demo for ${project.title}`}

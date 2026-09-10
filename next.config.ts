@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === "production";
 const repoName = process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split("/")[1]}` : "";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd && process.env.GITHUB_ACTIONS ? repoName : "");
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || (isProd && process.env.GITHUB_ACTIONS ? repoName : "");
 
 /**
  * HTTP Security Headers.
@@ -55,6 +55,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   output: "export",
   basePath: basePath || undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath || "",
+  },
   images: {
     unoptimized: true,
   },

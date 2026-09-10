@@ -11,13 +11,14 @@ import CoverflowCarousel from "./carousel/CoverflowCarousel";
 import CarouselControls from "./carousel/CarouselControls";
 import EmptyCategory from "./carousel/EmptyCategory";
 import { FolderGit2 } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 function ProjectVisualHeader({ project }: { project: ProjectItem }) {
   if (project.image) {
     return (
       <div className="relative w-full h-36 sm:h-40 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 group-hover:border-[#f8559f]/50 transition-all duration-300 shadow-md bg-black/40">
         <Image
-          src={project.image}
+          src={getAssetPath(project.image)}
           alt={project.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"

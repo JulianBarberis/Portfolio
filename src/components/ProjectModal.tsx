@@ -6,7 +6,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ProjectItem } from "@/data/types";
 import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
-import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
+import {
+  sanitizeExternalUrl,
+  isSafeExternalUrl,
+  getAssetPath,
+} from "@/lib/utils";
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -74,7 +78,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {project.image && (
           <div className="relative w-full h-48 sm:h-64 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-lg bg-black/40">
             <Image
-              src={project.image}
+              src={getAssetPath(project.image)}
               alt={project.title}
               fill
               sizes="(max-width: 768px) 100vw, 700px"

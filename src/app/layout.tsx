@@ -3,6 +3,8 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: "Julian Barberis | Software Developer & Full-Stack Engineer",
   description:
@@ -29,10 +31,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: `${basePath}/icon.png`, type: "image/png" },
+      { url: `${basePath}/favicon.ico`, sizes: "any" },
     ],
-    apple: [{ url: "/icon.png" }],
+    apple: [{ url: `${basePath}/icon.png` }],
   },
 };
 

@@ -43,7 +43,7 @@ jobs:
       - name: Build with Next.js (Static Export)
         run: pnpm build
         env:
-          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: "/Portfolio"
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

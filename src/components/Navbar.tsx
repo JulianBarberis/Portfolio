@@ -81,7 +81,7 @@ export default function Navbar() {
             href={cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-sm shadow-[#f8559f]/25 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:ring-offset-2"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white bg-[#b4637a] hover:bg-[#c4748d] border border-white/15 shadow-sm shadow-[#b4637a]/25 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#b4637a] focus-visible:ring-offset-2"
             aria-label={language === "es" ? "Ver CV en español" : "View Resume in English"}
           >
             <FileText className="w-3 h-3" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-1.5 mt-1 px-3 py-2 rounded-xl text-xs font-bold text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-sm shadow-[#f8559f]/25 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f]"
+              className="flex items-center justify-center gap-1.5 mt-1 px-3 py-2 rounded-xl text-xs font-bold text-white bg-[#b4637a] hover:bg-[#c4748d] border border-white/15 shadow-sm shadow-[#b4637a]/25 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#b4637a]"
               aria-label={language === "es" ? "Ver CV en español" : "View Resume in English"}
             >
               <FileText className="w-3.5 h-3.5" aria-hidden="true" />

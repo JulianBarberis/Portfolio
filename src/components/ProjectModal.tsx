@@ -194,7 +194,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-md shadow-[#f8559f]/25 focus-visible:ring-2 focus-visible:ring-[#f8559f]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-white bg-[#b4637a] hover:bg-[#c4748d] border border-white/15 shadow-md shadow-[#b4637a]/25 focus-visible:ring-2 focus-visible:ring-[#b4637a]"
             >
               <span>{language === "es" ? "Ir a la Demo" : "Open Demo"}</span>
               <ExternalLink className="w-3.5 h-3.5" />

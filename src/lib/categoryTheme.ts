@@ -70,38 +70,38 @@ export interface SkillCategoryTheme {
 export const SKILL_CATEGORY_THEMES: Record<string, SkillCategoryTheme> = {
   all: {
     activeClass:
-      "bg-slate-900 text-white border-slate-800 dark:bg-white/20 dark:text-white dark:border-white/30 shadow-sm",
-    dotClass: "bg-slate-300 dark:bg-zinc-300",
-    glowClass: "shadow-sm dark:shadow-[0_0_12px_rgba(255,255,255,0.15)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
   languages: {
     activeClass:
-      "bg-violet-600 text-white border-violet-400/40 shadow-[0_0_16px_rgba(139,92,246,0.35)]",
-    dotClass: "bg-violet-400",
-    glowClass: "shadow-[0_0_16px_rgba(139,92,246,0.35)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
   frameworks: {
     activeClass:
-      "bg-sky-600 text-white border-sky-400/40 shadow-[0_0_16px_rgba(14,165,233,0.35)]",
-    dotClass: "bg-sky-400",
-    glowClass: "shadow-[0_0_16px_rgba(14,165,233,0.35)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
   databases: {
     activeClass:
-      "bg-amber-600 text-white border-amber-400/40 shadow-[0_0_16px_rgba(217,119,6,0.35)]",
-    dotClass: "bg-amber-400",
-    glowClass: "shadow-[0_0_16px_rgba(217,119,6,0.35)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
   devops: {
     activeClass:
-      "bg-teal-600 text-white border-teal-400/40 shadow-[0_0_16px_rgba(20,184,166,0.35)]",
-    dotClass: "bg-teal-400",
-    glowClass: "shadow-[0_0_16px_rgba(20,184,166,0.35)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
   ai: {
     activeClass:
-      "bg-emerald-600 text-white border-emerald-400/40 shadow-[0_0_16px_rgba(16,185,129,0.35)]",
-    dotClass: "bg-emerald-400",
-    glowClass: "shadow-[0_0_16px_rgba(16,185,129,0.35)]",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
   },
 };

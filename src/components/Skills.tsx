@@ -50,15 +50,15 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Category Pill Switcher (Minimalist Segmented Nav with Distinct Colors) */}
+        {/* Category Pill Switcher (Matches general Navbar glass & active style) */}
         <div className="flex items-center justify-center mb-8">
-          <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1.5 rounded-full bg-slate-200/70 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 shadow-sm max-w-full backdrop-blur-md">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1 px-3 py-1.5 rounded-full apple-glass-nav max-w-full">
             <button
               onClick={() => setSelectedCategory("all")}
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] ${
                 selectedCategory === "all"
-                  ? `${SKILL_CATEGORY_THEMES.all.activeClass} font-semibold border`
-                  : "text-slate-600 dark:text-[var(--text-muted)] hover:text-slate-900 dark:hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
+                  ? `${SKILL_CATEGORY_THEMES.all.activeClass}`
+                  : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
               }`}
             >
               <span>{language === "es" ? "Todos" : "All"}</span>
@@ -71,10 +71,10 @@ export default function Skills() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] ${
                     isSelected
-                      ? `${theme?.activeClass ?? "bg-slate-900 text-white dark:bg-white/15 dark:text-white"} font-semibold border`
-                      : "text-slate-600 dark:text-[var(--text-muted)] hover:text-slate-900 dark:hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
+                      ? `${theme?.activeClass ?? "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20"}`
+                      : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
                 >
                   {isSelected && theme && (

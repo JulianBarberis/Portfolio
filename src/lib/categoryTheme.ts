@@ -70,9 +70,9 @@ export interface SkillCategoryTheme {
 export const SKILL_CATEGORY_THEMES: Record<string, SkillCategoryTheme> = {
   all: {
     activeClass:
-      "bg-white/20 dark:bg-white/20 text-white border-white/30 shadow-sm",
-    dotClass: "bg-zinc-300",
-    glowClass: "shadow-[0_0_12px_rgba(255,255,255,0.15)]",
+      "bg-slate-900 text-white border-slate-800 dark:bg-white/20 dark:text-white dark:border-white/30 shadow-sm",
+    dotClass: "bg-slate-300 dark:bg-zinc-300",
+    glowClass: "shadow-sm dark:shadow-[0_0_12px_rgba(255,255,255,0.15)]",
   },
   languages: {
     activeClass:

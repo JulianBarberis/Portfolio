@@ -126,13 +126,13 @@ describe("Skills Component (src/components/Skills.tsx)", () => {
       renderSkills("es");
 
       const allButton = screen.getByRole("button", { name: /Todos/i });
-      expect(allButton).not.toHaveClass("bg-white/20");
+      expect(allButton).not.toHaveClass("bg-slate-900");
 
       await user.click(allButton);
 
       // Verify active styles on 'Todos'
-      expect(allButton).toHaveClass("bg-white/20");
-      expect(allButton).toHaveClass("border-white/30");
+      expect(allButton).toHaveClass("bg-slate-900");
+      expect(allButton).toHaveClass("border-slate-800");
 
       // Check skills from various categories are all present
       expect(screen.getByText("TypeScript")).toBeInTheDocument();

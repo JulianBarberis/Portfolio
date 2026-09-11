@@ -52,13 +52,13 @@ export default function Skills() {
 
         {/* Category Pill Switcher (Minimalist Segmented Nav with Distinct Colors) */}
         <div className="flex items-center justify-center mb-8">
-          <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1.5 rounded-full apple-glass border border-white/10 shadow-lg max-w-full">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1.5 rounded-full bg-slate-200/70 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 shadow-sm max-w-full backdrop-blur-md">
             <button
               onClick={() => setSelectedCategory("all")}
               className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
                 selectedCategory === "all"
-                  ? "bg-white/20 dark:bg-white/20 text-white font-semibold shadow-sm border border-white/30"
-                  : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
+                  ? `${SKILL_CATEGORY_THEMES.all.activeClass} font-semibold border`
+                  : "text-slate-600 dark:text-[var(--text-muted)] hover:text-slate-900 dark:hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
               }`}
             >
               <span>{language === "es" ? "Todos" : "All"}</span>
@@ -73,8 +73,8 @@ export default function Skills() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
                     isSelected
-                      ? `${theme?.activeClass ?? "bg-white/15 text-white"} font-semibold border`
-                      : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
+                      ? `${theme?.activeClass ?? "bg-slate-900 text-white dark:bg-white/15 dark:text-white"} font-semibold border`
+                      : "text-slate-600 dark:text-[var(--text-muted)] hover:text-slate-900 dark:hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
                 >
                   {isSelected && theme && (
@@ -92,7 +92,7 @@ export default function Skills() {
           {displayedSkills.map((skill, index) => (
             <div
               key={`${skill.name}-${index}`}
-              className="group flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-[#f8559f]/40 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 shadow-sm hover:shadow-md cursor-default select-none animate-in fade-in zoom-in-95 duration-150"
+              className="group flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:bg-slate-50 dark:hover:bg-white/10 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5 shadow-sm hover:shadow-md cursor-default select-none animate-in fade-in zoom-in-95 duration-150"
             >
               {/* Colored Tech SVG Logo */}
               <div className="shrink-0 flex items-center justify-center">
@@ -100,7 +100,7 @@ export default function Skills() {
               </div>
 
               {/* Tech Name */}
-              <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)] dark:text-zinc-200 group-hover:text-white transition-colors">
+              <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-zinc-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors">
                 {skill.name}
               </span>
             </div>

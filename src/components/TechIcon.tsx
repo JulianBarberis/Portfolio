@@ -78,7 +78,7 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
     return <SiSpringboot className={`${className} text-[#6DB33F]`} />;
   }
   if (normalized.includes("next")) {
-    return <SiNextdotjs className={`${className} text-black dark:text-white`} />;
+    return <SiNextdotjs className={`${className} text-slate-900 dark:text-white`} />;
   }
   if (normalized.includes("react")) {
     return <SiReact className={`${className} text-[#61DAFB]`} />;
@@ -90,10 +90,10 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
     return <SiNodedotjs className={`${className} text-[#5FA04E]`} />;
   }
   if (normalized.includes("express")) {
-    return <SiExpress className={`${className} text-black dark:text-white`} />;
+    return <SiExpress className={`${className} text-slate-900 dark:text-white`} />;
   }
   if (normalized.includes("socket.io") || normalized.includes("socketio") || normalized.includes("websocket")) {
-    return <SiSocketdotio className={`${className} text-black dark:text-white`} />;
+    return <SiSocketdotio className={`${className} text-slate-900 dark:text-white`} />;
   }
   if (normalized.includes("vite")) {
     return <SiVite className={`${className} text-[#646CFF]`} />;
@@ -154,7 +154,7 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
     return <SiFlyway className={`${className} text-[#CC0000]`} />;
   }
   if (normalized.includes("jwt") || normalized.includes("json web token")) {
-    return <SiJsonwebtokens className={`${className} text-black dark:text-white`} />;
+    return <SiJsonwebtokens className={`${className} text-slate-900 dark:text-white`} />;
   }
 
   // AI & Architecture

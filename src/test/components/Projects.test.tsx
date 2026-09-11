@@ -47,6 +47,24 @@ describe("Projects Component (src/components/Projects.tsx)", () => {
       expect(tabTexts).toContain("Backend");
       expect(tabTexts).toContain("Academic");
     });
+
+    it("applies active navbar styling (pink text and translucent pink background) to selected tab", async () => {
+      const user = userEvent.setup();
+      renderProjects("es");
+
+      const allTab = screen.getByRole("tab", { name: /Todos/i });
+      expect(allTab).toHaveClass("text-[#f8559f]");
+      expect(allTab).toHaveClass("bg-[#f8559f]/10");
+
+      const aiTab = screen.getByRole("tab", { name: /IA/i });
+      expect(aiTab).not.toHaveClass("text-[#f8559f]");
+
+      await user.click(aiTab);
+
+      expect(aiTab).toHaveClass("text-[#f8559f]");
+      expect(aiTab).toHaveClass("bg-[#f8559f]/10");
+      expect(allTab).not.toHaveClass("text-[#f8559f]");
+    });
   });
 
   describe("Category Filtering", () => {

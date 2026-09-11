@@ -191,45 +191,47 @@ export default function Projects() {
           </h2>
         </div>
 
-        {/* Category Pills */}
-        <div
-          role="tablist"
-          onKeyDown={handleTabKeyDown}
-          aria-label={
-            language === "es" ? "Filtrar por categoría" : "Filter by category"
-          }
-          className="flex flex-wrap items-center justify-center gap-1.5 mb-8 p-1.5 rounded-full apple-glass border border-white/10 shadow-lg max-w-fit mx-auto"
-        >
-          {categories.map((cat) => {
-            const isSelected = activeCategory === cat;
-            const theme = PROJECT_CATEGORY_THEMES[cat as ProjectCategory];
-            const activeClass =
-              cat === "All"
-                ? "bg-white/20 dark:bg-white/20 text-white font-semibold shadow-sm border border-white/30"
-                : theme?.activeTabClass ?? "bg-[#3744bd] text-white shadow-sm";
+        {/* Category Pills (Matches general Navbar glass & active style) */}
+        <div className="flex items-center justify-center mb-8">
+          <div
+            role="tablist"
+            onKeyDown={handleTabKeyDown}
+            aria-label={
+              language === "es" ? "Filtrar por categoría" : "Filter by category"
+            }
+            className="inline-flex flex-wrap items-center justify-center gap-1 px-3 py-1.5 rounded-full apple-glass-nav max-w-full"
+          >
+            {categories.map((cat) => {
+              const isSelected = activeCategory === cat;
+              const theme = PROJECT_CATEGORY_THEMES[cat as ProjectCategory];
+              const activeClass =
+                cat === "All"
+                  ? "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20"
+                  : theme?.activeTabClass ?? "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20";
 
-            return (
-              <button
-                key={cat}
-                id={toTabId(cat)}
-                role="tab"
-                aria-selected={isSelected}
-                tabIndex={isSelected ? 0 : -1}
-                aria-controls="projects-tabpanel"
-                onClick={() => handleCategoryChange(cat)}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none ${
-                  isSelected
-                    ? `${activeClass} font-semibold`
-                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
-                }`}
-              >
-                {isSelected && theme && (
-                  <span className={`w-1.5 h-1.5 rounded-full ${theme.dotColor}`} />
-                )}
-                <span>{getCategoryLabel(cat)}</span>
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={cat}
+                  id={toTabId(cat)}
+                  role="tab"
+                  aria-selected={isSelected}
+                  tabIndex={isSelected ? 0 : -1}
+                  aria-controls="projects-tabpanel"
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none ${
+                    isSelected
+                      ? `${activeClass}`
+                      : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
+                  }`}
+                >
+                  {isSelected && theme && (
+                    <span className={`w-1.5 h-1.5 rounded-full ${theme.dotColor}`} />
+                  )}
+                  <span>{getCategoryLabel(cat)}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Screen Reader Live Region */}

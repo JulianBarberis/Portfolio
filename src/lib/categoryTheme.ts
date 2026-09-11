@@ -16,8 +16,8 @@ export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryThe
     modalBadgeClass:
       "bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30",
     activeTabClass:
-      "bg-sky-600 text-white shadow-[0_0_15px_-3px_rgba(2,132,199,0.5)] border-sky-400/30",
-    dotColor: "bg-sky-400",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
   },
   AI: {
     label: { en: "AI", es: "IA" },
@@ -26,8 +26,8 @@ export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryThe
     modalBadgeClass:
       "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30",
     activeTabClass:
-      "bg-emerald-600 text-white shadow-[0_0_15px_-3px_rgba(5,150,105,0.5)] border-emerald-400/30",
-    dotColor: "bg-emerald-400",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
   },
   Backend: {
     label: { en: "Backend", es: "Backend" },
@@ -36,8 +36,8 @@ export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryThe
     modalBadgeClass:
       "bg-amber-500/15 text-amber-600 dark:text-amber-300 border border-amber-500/30",
     activeTabClass:
-      "bg-amber-600 text-white shadow-[0_0_15px_-3px_rgba(217,119,6,0.5)] border-amber-400/30",
-    dotColor: "bg-amber-400",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
   },
   Frontend: {
     label: { en: "Frontend", es: "Frontend" },
@@ -46,8 +46,8 @@ export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryThe
     modalBadgeClass:
       "bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30",
     activeTabClass:
-      "bg-rose-600 text-white shadow-[0_0_15px_-3px_rgba(225,29,72,0.5)] border-rose-400/30",
-    dotColor: "bg-rose-400",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
   },
   Académico: {
     label: { en: "Academic", es: "Académico" },
@@ -56,8 +56,8 @@ export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryThe
     modalBadgeClass:
       "bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/30",
     activeTabClass:
-      "bg-purple-600 text-white shadow-[0_0_15px_-3px_rgba(147,51,234,0.5)] border-purple-400/30",
-    dotColor: "bg-purple-400",
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
   },
 };
 

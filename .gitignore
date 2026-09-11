@@ -39,7 +39,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # AI assistants, agents and LLM toolchain
 .agents/

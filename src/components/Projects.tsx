@@ -145,7 +145,7 @@ export default function Projects() {
     const target = e.target as HTMLElement | null;
     if (
       target?.closest('[role="tablist"]') ||
-      target?.closest("input, textarea, select, a")
+      target?.closest("button, input, textarea, select, a, [role='button']")
     ) {
       return;
     }

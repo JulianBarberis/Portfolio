@@ -17,6 +17,18 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
+  const copyTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const submitTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resetSubmittedTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  React.useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+      if (resetSubmittedTimeoutRef.current) clearTimeout(resetSubmittedTimeoutRef.current);
+    };
+  }, []);
+
   // Strips HTML tags, control characters, and trims whitespace
   const sanitizeText = (value: string): string =>
     value
@@ -50,7 +62,8 @@ export default function Contact() {
     try {
       await navigator.clipboard.writeText(personal.email);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      copyTimeoutRef.current = setTimeout(() => setCopied(false), 2500);
     } catch {
       // Fallback
     }
@@ -61,7 +74,8 @@ export default function Contact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
+    if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+    submitTimeoutRef.current = setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
 
@@ -74,7 +88,8 @@ export default function Contact() {
 
       setFormData({ name: "", email: "", message: "" });
       setFormErrors({});
-      setTimeout(() => setSubmitted(false), 5000);
+      if (resetSubmittedTimeoutRef.current) clearTimeout(resetSubmittedTimeoutRef.current);
+      resetSubmittedTimeoutRef.current = setTimeout(() => setSubmitted(false), 5000);
     }, 600);
   };
 

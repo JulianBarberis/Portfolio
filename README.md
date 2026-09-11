@@ -32,7 +32,7 @@
 | **Sobre mí** | Perfil profesional, formación académica (UNSAM, Coderhouse) y trayectoria |
 | **Experiencia** | Bento grid con línea de tiempo y transición de proyectista eléctrico CAD a desarrollador de software con Clean Architecture |
 | **Habilidades** | Matriz interactiva de tecnologías con filtrado por categoría e íconos de marca |
-| **Proyectos** | Carrusel dual (modo Fluido con física magnética / modo Coverflow 3D) con modales de arquitectura detallados y enlaces seguros |
+| **Proyectos** | Carrusel 3D estilo Coverflow con filtrado multi-categoría, badges individuales, física de resorte y modales de arquitectura |
 | **Contacto** | Formulario interactivo con saneamiento de entradas, copia rápida al portapapeles y animación confetti |
 
 ### 🛠️ Stack Tecnológico

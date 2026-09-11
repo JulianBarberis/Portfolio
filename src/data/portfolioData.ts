@@ -335,7 +335,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "studyquest",
       title: "StudyQuest",
-      category: "Full-Stack",
+      category: ["Full-Stack", "AI"],
       year: "2026",
       featured: true,
       status: "live",
@@ -383,7 +383,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "booklibre",
       title: "BookLibre",
-      category: "Full-Stack",
+      category: ["Full-Stack"],
       year: "2026",
       featured: true,
       status: "coming_soon",
@@ -425,7 +425,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "sqlify",
       title: "SQLify",
-      category: "AI",
+      category: ["Full-Stack", "AI"],
       year: "2025",
       featured: true,
       status: "live",
@@ -467,7 +467,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "algo-que-pedir",
       title: "AlgoQuePedir",
-      category: "Backend",
+      category: ["Full-Stack", "Backend"],
       year: "2025",
       featured: true,
       status: "live",
@@ -493,6 +493,16 @@ export const portfolioData: PortfolioData = {
           "Estructuras de datos avanzadas: árboles, heaps, colas de prioridad y representaciones de grafos.",
           "Paradigmas algorítmicos: heurísticas greedy, programación dinámica y estrategias de backtracking.",
           "Diseño orientado a objetos con separación limpia entre entidades de dominio y lógica algorítmica.",
+        ],
+      },
+      roadmap: {
+        en: [
+          "Validated test suite with 100% test coverage on graph and heap algorithms.",
+          "Codebase open-sourced as reference implementation for UNSAM Algorithms course.",
+        ],
+        es: [
+          "Suite de pruebas unitarias validada con cobertura en algoritmos de grafos y heaps.",
+          "Código publicado como implementación de referencia para Algoritmos UNSAM.",
         ],
       },
     },

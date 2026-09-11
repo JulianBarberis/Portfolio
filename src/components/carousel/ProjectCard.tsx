@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ProjectItem } from "@/data/types";
+import { ProjectItem, normalizeCategories } from "@/data/types";
 import { useLanguage } from "@/context/LanguageContext";
 import TechIcon from "@/components/TechIcon";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
@@ -25,6 +25,9 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const { language, t } = useLanguage();
   const isLive = project.status === "live";
+  const categories = Array.from(
+    new Set(normalizeCategories(project.category))
+  );
 
   return (
     <div
@@ -40,26 +43,35 @@ export default function ProjectCard({
 
         {/* Category & Status */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <span className="text-[11px] font-mono font-bold text-[#3744bd] dark:text-[#93c5fd] uppercase tracking-wider">
-            {project.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {categories.map((cat) => (
+              <span
+                key={cat}
+                className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-[#3744bd] dark:text-[#93c5fd] bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/20 dark:border-indigo-400/30"
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
 
-          {project.status === "live" ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span>{language === "es" ? "En Producción" : "Live"}</span>
-            </span>
-          ) : project.status === "in_development" ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-              <span>{language === "es" ? "En Desarrollo" : "In Dev"}</span>
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
-              <Clock className="w-2.5 h-2.5" />
-              <span>{language === "es" ? "Deploy Próximo" : "Deploying"}</span>
-            </span>
-          )}
+          <div className="shrink-0">
+            {project.status === "live" ? (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>{language === "es" ? "En Producción" : "Live"}</span>
+              </span>
+            ) : project.status === "in_development" ? (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                <span>{language === "es" ? "En Desarrollo" : "In Dev"}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
+                <Clock className="w-2.5 h-2.5" />
+                <span>{language === "es" ? "Deploy Próximo" : "Deploying"}</span>
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Title & Tagline */}

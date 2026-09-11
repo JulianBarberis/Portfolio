@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { ProjectItem } from "@/data/types";
+import { ProjectItem, normalizeCategories } from "@/data/types";
 import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
 import {
@@ -24,6 +24,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   const highlights = tArr(project.architectureHighlights);
   const roadmap = project.roadmap ? tArr(project.roadmap) : [];
+  const categories = Array.from(
+    new Set(normalizeCategories(project.category))
+  );
 
   return (
     <div 
@@ -48,11 +51,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-3 pb-3 border-b border-black/5 dark:border-white/10">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#f8559f]/10 text-[#f8559f]">
-                {project.category}
-              </span>
-              <span className="text-xs font-mono text-[var(--text-muted)]">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {categories.map((cat) => (
+                <span
+                  key={cat}
+                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20"
+                >
+                  {cat}
+                </span>
+              ))}
+              <span className="text-xs font-mono text-[var(--text-muted)] ml-0.5">
                 {project.year}
               </span>
             </div>

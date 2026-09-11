@@ -338,8 +338,8 @@ export const portfolioData: PortfolioData = {
       category: "Full-Stack",
       year: "2026",
       featured: true,
-      status: "in_development",
-      demoUrl: undefined,
+      status: "live",
+      demoUrl: "https://lorengrz.github.io/StudyQuest/",
       githubUrl: "https://github.com/LorenGrz/StudyQuest",
       tagline: {
         en: "Collaborative Study Platform with Real-Time Matchmaking & AI-Generated Quests",

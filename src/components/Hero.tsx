@@ -62,10 +62,10 @@ export default function Hero() {
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-3">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white bg-[#b4637a] hover:bg-[#c4748d] border border-white/15 shadow-lg shadow-[#b4637a]/25 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#b4637a] focus-visible:ring-offset-2"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:ring-offset-2"
               >
                 <span>{language === "es" ? "Ver Proyectos" : "View Projects"}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#f8559f]" />
               </a>
 
               <a

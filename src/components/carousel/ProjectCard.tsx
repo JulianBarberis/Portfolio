@@ -148,10 +148,10 @@ export default function ProjectCard({
               rel="noopener noreferrer"
               aria-label={`Live demo for ${project.title}`}
               tabIndex={isCoverflowSide ? -1 : 0}
-              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-[#f8559f] to-[#ff68ad] hover:opacity-90 border border-white/15 shadow-sm shadow-[#f8559f]/25 active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none"
+              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none"
             >
               <span>Demo</span>
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3 text-[#f8559f]" />
             </a>
           )}
         </div>

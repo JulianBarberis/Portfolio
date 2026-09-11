@@ -342,9 +342,9 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-full font-bold text-xs text-white bg-[#b4637a] hover:bg-[#c4748d] border border-white/15 shadow-lg shadow-[#b4637a]/25 transition-all active:scale-95 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[#b4637a] focus-visible:ring-offset-2"
+                  className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-full font-semibold text-xs text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 transition-all active:scale-95 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:ring-offset-2"
                 >
-                  <Send className="w-3.5 h-3.5" aria-hidden="true" />
+                  <Send className="w-3.5 h-3.5 text-[#f8559f]" aria-hidden="true" />
                   <span>{isSubmitting ? t(contact.sending) : t(contact.sendButton)}</span>
                 </button>
               </form>

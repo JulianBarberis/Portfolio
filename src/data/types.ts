@@ -47,6 +47,34 @@ export interface SkillCategory {
   }[];
 }
 
+export type ProjectCategory =
+  | "Full-Stack"
+  | "Backend"
+  | "Frontend"
+  | "AI"
+  | "Académico";
+
+/**
+ * Normalizes project category/categories input into a deduplicated, trimmed array of ProjectCategory.
+ * Defensively handles undefined, null, single string, sparse arrays, and untrimmed whitespace.
+ */
+export function normalizeCategories(
+  category?: ProjectCategory | ProjectCategory[] | string | string[] | null
+): ProjectCategory[] {
+  if (!category) return [];
+  const raw = Array.isArray(category) ? category : [category];
+  return Array.from(
+    new Set(
+      raw
+        .filter(
+          (c): c is ProjectCategory =>
+            Boolean(c && typeof c === "string" && (c as string).trim())
+        )
+        .map((c) => (c as string).trim() as ProjectCategory)
+    )
+  );
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -61,7 +89,8 @@ export interface ProjectItem {
   architectureHighlights: LocalizedArray;
   roadmap?: LocalizedArray;
   image?: string;
-  category: "Full-Stack" | "Backend" | "Frontend" | "AI";
+  category: ProjectCategory | ProjectCategory[];
+  projectType?: LocalizedString;
 }
 
 export interface PortfolioData {
@@ -107,6 +136,8 @@ export interface PortfolioData {
     sendButton: LocalizedString;
     sending: LocalizedString;
     successMessage: LocalizedString;
+    errorMessage?: LocalizedString;
+    mailFallbackButton?: LocalizedString;
     copyEmail: LocalizedString;
     copiedEmail: LocalizedString;
     locationLabel: LocalizedString;

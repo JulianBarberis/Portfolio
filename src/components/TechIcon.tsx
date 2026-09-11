@@ -27,10 +27,17 @@ import {
   SiPostman,
   SiHtml5,
   SiGoogle,
+  SiExpress,
+  SiSocketdotio,
+  SiVite,
+  SiFramer,
+  SiTypeorm,
+  SiFlyway,
+  SiJsonwebtokens,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
 import { TbSql, TbLayersLinked, TbBrain, TbPrompt, TbFileCheck } from "react-icons/tb";
-import { Code2 } from "lucide-react";
+import { Code2, Boxes, Network, Cpu, GraduationCap, Component } from "lucide-react";
 
 interface TechIconProps {
   name: string;
@@ -71,7 +78,7 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
     return <SiSpringboot className={`${className} text-[#6DB33F]`} />;
   }
   if (normalized.includes("next")) {
-    return <SiNextdotjs className={`${className} text-black dark:text-white`} />;
+    return <SiNextdotjs className={`${className} text-slate-900 dark:text-white`} />;
   }
   if (normalized.includes("react")) {
     return <SiReact className={`${className} text-[#61DAFB]`} />;
@@ -81,6 +88,18 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
   }
   if (normalized.includes("node")) {
     return <SiNodedotjs className={`${className} text-[#5FA04E]`} />;
+  }
+  if (normalized.includes("express")) {
+    return <SiExpress className={`${className} text-slate-900 dark:text-white`} />;
+  }
+  if (normalized.includes("socket.io") || normalized.includes("socketio") || normalized.includes("websocket")) {
+    return <SiSocketdotio className={`${className} text-slate-900 dark:text-white`} />;
+  }
+  if (normalized.includes("vite")) {
+    return <SiVite className={`${className} text-[#646CFF]`} />;
+  }
+  if (normalized.includes("framer motion") || normalized.includes("framer")) {
+    return <SiFramer className={`${className} text-[#0055FF]`} />;
   }
   if (normalized.includes("svelte")) {
     return <SiSvelte className={`${className} text-[#FF3E00]`} />;
@@ -93,6 +112,9 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
   }
   if (normalized.includes("chakra")) {
     return <SiChakraui className={`${className} text-[#319795]`} />;
+  }
+  if (normalized.includes("zustand")) {
+    return <Component className={`${className} text-[#443E38] dark:text-[#BAA898]`} />;
   }
 
   // Databases
@@ -122,8 +144,17 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
   if (normalized.includes("github actions")) {
     return <SiGithubactions className={`${className} text-[#2088FF]`} />;
   }
+  if (normalized.includes("typeorm")) {
+    return <SiTypeorm className={`${className} text-[#FE0803]`} />;
+  }
   if (normalized.includes("postman")) {
     return <SiPostman className={`${className} text-[#FF6C37]`} />;
+  }
+  if (normalized.includes("flyway")) {
+    return <SiFlyway className={`${className} text-[#CC0000]`} />;
+  }
+  if (normalized.includes("jwt") || normalized.includes("json web token")) {
+    return <SiJsonwebtokens className={`${className} text-slate-900 dark:text-white`} />;
   }
 
   // AI & Architecture
@@ -155,6 +186,23 @@ export default function TechIcon({ name, className = "w-5 h-5" }: TechIconProps)
   }
   if (normalized.includes("context injection") || normalized.includes("copilot")) {
     return <TbBrain className={`${className} text-[#f8559f]`} />;
+  }
+
+  // Computer Science & University
+  if (normalized.includes("data structure")) {
+    return <Boxes className={`${className} text-[#38BDF8]`} />;
+  }
+  if (normalized === "graphs" || (normalized.includes("graph") && !normalized.includes("graphql"))) {
+    return <Network className={`${className} text-[#A855F7]`} />;
+  }
+  if (normalized.includes("algorithm")) {
+    return <Cpu className={`${className} text-[#EAB308]`} />;
+  }
+  if (normalized.includes("oop") || normalized.includes("object-oriented")) {
+    return <TbLayersLinked className={`${className} text-[#3744bd] dark:text-[#93c5fd]`} />;
+  }
+  if (normalized.includes("unsam")) {
+    return <GraduationCap className={`${className} text-[#3B82F6]`} />;
   }
 
   return <Code2 className={`${className} text-[#f8559f]`} />;

@@ -63,6 +63,7 @@ export default function CarouselControls({
               key={project.id}
               role="tab"
               aria-selected={isActive}
+              tabIndex={isActive ? 0 : -1}
               aria-label={`${
                 language === "es" ? "Ir al proyecto" : "Go to project"
               } ${idx + 1}: ${project.title}`}

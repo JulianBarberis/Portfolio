@@ -1,0 +1,107 @@
+import { ProjectCategory } from "@/data/types";
+
+export interface ProjectCategoryTheme {
+  label: { en: string; es: string };
+  pillClass: string;
+  modalBadgeClass: string;
+  activeTabClass: string;
+  dotColor: string;
+}
+
+export const PROJECT_CATEGORY_THEMES: Record<ProjectCategory, ProjectCategoryTheme> = {
+  "Full-Stack": {
+    label: { en: "Full-Stack", es: "Full-Stack" },
+    pillClass:
+      "text-sky-600 dark:text-sky-300 bg-sky-500/10 dark:bg-sky-500/20 border border-sky-500/20 dark:border-sky-400/30",
+    modalBadgeClass:
+      "bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30",
+    activeTabClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
+  },
+  AI: {
+    label: { en: "AI", es: "IA" },
+    pillClass:
+      "text-emerald-600 dark:text-emerald-300 bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 dark:border-emerald-400/30",
+    modalBadgeClass:
+      "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30",
+    activeTabClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
+  },
+  Backend: {
+    label: { en: "Backend", es: "Backend" },
+    pillClass:
+      "text-amber-600 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 dark:border-amber-400/30",
+    modalBadgeClass:
+      "bg-amber-500/15 text-amber-600 dark:text-amber-300 border border-amber-500/30",
+    activeTabClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
+  },
+  Frontend: {
+    label: { en: "Frontend", es: "Frontend" },
+    pillClass:
+      "text-rose-600 dark:text-rose-300 bg-rose-500/10 dark:bg-rose-500/20 border border-rose-500/20 dark:border-rose-400/30",
+    modalBadgeClass:
+      "bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30",
+    activeTabClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
+  },
+  Académico: {
+    label: { en: "Academic", es: "Académico" },
+    pillClass:
+      "text-purple-600 dark:text-purple-300 bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/20 dark:border-purple-400/30",
+    modalBadgeClass:
+      "bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/30",
+    activeTabClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotColor: "bg-[#f8559f]",
+  },
+};
+
+export interface SkillCategoryTheme {
+  activeClass: string;
+  dotClass: string;
+  glowClass: string;
+}
+
+export const SKILL_CATEGORY_THEMES: Record<string, SkillCategoryTheme> = {
+  all: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+  languages: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+  frameworks: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+  databases: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+  devops: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+  ai: {
+    activeClass:
+      "text-[#f8559f] font-semibold bg-[#f8559f]/10 shadow-sm border border-[#f8559f]/20",
+    dotClass: "bg-[#f8559f]",
+    glowClass: "shadow-sm",
+  },
+};

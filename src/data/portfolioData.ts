@@ -31,8 +31,8 @@ export const portfolioData: PortfolioData = {
       es: "Disponible para nuevas oportunidades",
     },
     shortBio: {
-      en: "Im a Software Developer. Building scalable backends with Kotlin & JAVA with Spring Boot, modern interfaces with React, Next & TypeScript, and containerized Docker systems.",
-      es: "Soy Desarrollador de Software. Construyo backends escalables en Kotlin & JAVA con Spring Boot, interfaces modernas en React, Next & TypeScript y sistemas en Docker.",
+      en: "Building scalable backends with Kotlin & JAVA with Spring Boot, modern interfaces with React, Next & TypeScript, and containerized Docker systems.",
+      es: "Construyo backends escalables en Kotlin & JAVA con Spring Boot, interfaces modernas en React, Next & TypeScript y sistemas en Docker.",
     },
     fullBio: {
       en: [
@@ -335,19 +335,23 @@ export const portfolioData: PortfolioData = {
     {
       id: "studyquest",
       title: "StudyQuest",
-      category: "Full-Stack",
+      category: ["Full-Stack", "AI", "Académico"],
+      projectType: {
+        en: "Academic Project",
+        es: "Proyecto Académico",
+      },
       year: "2026",
       featured: true,
       status: "live",
       demoUrl: "https://lorengrz.github.io/StudyQuest/",
       githubUrl: "https://github.com/LorenGrz/StudyQuest",
       tagline: {
-        en: "Collaborative Study Platform with Real-Time Matchmaking & AI-Generated Quests",
-        es: "Plataforma de estudio colaborativo con matchmaking en tiempo real y quests generados por IA",
+        en: "Collaborative Study Platform with Real-Time Matchmaking & AI Quests — Academic Project",
+        es: "Plataforma de estudio colaborativo con matchmaking en tiempo real y quests por IA — Proyecto Académico",
       },
       description: {
-        en: "Full-stack collaborative study platform with real-time party matchmaking, study rooms, enriched chat, and AI-generated quizzes from notes or PDF files. Features a competitive ELO system, gamified leagues, leaderboards, and skill trees built with NestJS, React, PostgreSQL and WebSockets.",
-        es: "Plataforma full-stack de estudio colaborativo con matchmaking en tiempo real, salas de estudio (parties), chat enriquecido y quizzes/quests generados dinámicamente por IA a partir de apuntes o PDFs. Incluye sistema ELO competitivo, ligas gamificadas, leaderboards y árbol de habilidades — NestJS, React, PostgreSQL y WebSockets.",
+        en: "Academic project developed as a full-stack collaborative study platform with real-time party matchmaking, study rooms, enriched chat, and AI-generated quizzes from notes or PDF files. Features a competitive ELO system, gamified leagues, leaderboards, and skill trees built with NestJS, React, PostgreSQL and WebSockets.",
+        es: "Proyecto académico concebido como plataforma full-stack de estudio colaborativo con matchmaking en tiempo real, salas de estudio (parties), chat enriquecido y quizzes/quests generados por IA a partir de apuntes o PDFs. Incluye sistema ELO competitivo, ligas gamificadas, leaderboards y árbol de habilidades — NestJS, React, PostgreSQL y WebSockets.",
       },
       technologies: ["NestJS", "TypeScript", "React 19", "PostgreSQL", "TypeORM", "Socket.IO", "Gemini AI", "Zustand", "Tailwind CSS", "Docker", "Vite", "Framer Motion"],
       image: "/projects/studyquest.png",
@@ -383,19 +387,23 @@ export const portfolioData: PortfolioData = {
     {
       id: "booklibre",
       title: "BookLibre",
-      category: "Full-Stack",
+      category: ["Full-Stack", "Académico"],
+      projectType: {
+        en: "Academic Project",
+        es: "Proyecto Académico",
+      },
       year: "2026",
       featured: true,
       status: "coming_soon",
       demoUrl: undefined,
       githubUrl: "https://github.com/JulianBarberis",
       tagline: {
-        en: "DDD-driven Book Sharing Platform with Gamified Engine",
-        es: "Plataforma de libros basada en DDD con motor de reputación",
+        en: "DDD-driven Book Sharing Platform with Gamified Engine — Academic Project",
+        es: "Plataforma de libros basada en DDD con motor de reputación — Proyecto Académico",
       },
       description: {
-        en: "Full-stack book-sharing platform built with Kotlin, Spring Boot, React, and PostgreSQL using Domain-Driven Design (DDD).",
-        es: "Plataforma para compartir libros desarrollada con Kotlin, Spring Boot, React y PostgreSQL bajo principios DDD.",
+        en: "Academic project built as a full-stack book-sharing platform with Kotlin, Spring Boot, React, and PostgreSQL using Domain-Driven Design (DDD) principles.",
+        es: "Proyecto académico desarrollado como plataforma full-stack para compartir libros con Kotlin, Spring Boot, React y PostgreSQL bajo principios de Domain-Driven Design (DDD).",
       },
       technologies: ["Kotlin", "Spring Boot", "React", "PostgreSQL", "Flyway", "Docker", "JWT"],
       image: "/projects/booklibre.png",
@@ -425,19 +433,23 @@ export const portfolioData: PortfolioData = {
     {
       id: "sqlify",
       title: "SQLify",
-      category: "AI",
+      category: ["Full-Stack", "AI", "Académico"],
+      projectType: {
+        en: "Academic Project",
+        es: "Proyecto Académico",
+      },
       year: "2025",
       featured: true,
       status: "live",
       demoUrl: "https://sq-lify-sandy.vercel.app/",
       githubUrl: "https://github.com/JulianBarberis/SQLify",
       tagline: {
-        en: "Natural Language to SQL Query Engine with Google Gemini AI",
-        es: "Traductor de lenguaje natural a SQL con Google Gemini AI",
+        en: "Natural Language to SQL Query Engine with Google Gemini AI — Academic Project",
+        es: "Traductor de lenguaje natural a SQL con Google Gemini AI — Proyecto Académico",
       },
       description: {
-        en: "Full-stack application using React, TypeScript, Express, and MySQL that translates natural queries into safe SQL using Gemini AI.",
-        es: "Aplicación full-stack en React, TypeScript, Express y MySQL que traduce preguntas a consultas SQL seguras con Gemini AI.",
+        en: "Academic full-stack application using React, TypeScript, Express, and MySQL that translates natural queries into safe SQL using Gemini AI.",
+        es: "Proyecto académico full-stack en React, TypeScript, Express y MySQL que traduce preguntas a consultas SQL seguras con Gemini AI.",
       },
       technologies: ["React", "TypeScript", "Node.js", "Express", "Gemini AI", "MySQL"],
       image: "/projects/sqlify.png",
@@ -467,19 +479,23 @@ export const portfolioData: PortfolioData = {
     {
       id: "algo-que-pedir",
       title: "AlgoQuePedir",
-      category: "Backend",
+      category: ["Full-Stack", "Backend", "Académico"],
+      projectType: {
+        en: "University Academic Project (UNSAM)",
+        es: "Proyecto Académico Universitario (UNSAM)",
+      },
       year: "2025",
       featured: true,
       status: "live",
       demoUrl: undefined,
       githubUrl: "https://github.com/JulianBarberis/JulianBarberis-AlgoQuePedir_Algoritmos2y3",
       tagline: {
-        en: "Order Management System with Advanced Data Structures — UNSAM Algorithms 2 & 3",
-        es: "Sistema de gestión de pedidos con estructuras de datos avanzadas — Algoritmos 2 y 3 UNSAM",
+        en: "Order Management System with Advanced Data Structures — UNSAM Algorithms 2 & 3 (Academic Project)",
+        es: "Sistema de gestión de pedidos con estructuras de datos avanzadas — Algoritmos 2 y 3 UNSAM (Proyecto Académico)",
       },
       description: {
-        en: "Academic project for the Algorithms 2 & 3 course at UNSAM. Implements a full order management system applying advanced data structures (trees, heaps, graphs) and algorithmic paradigms such as greedy, dynamic programming, and backtracking to solve real-world ordering and routing problems.",
-        es: "Proyecto académico para la materia Algoritmos 2 y 3 de la UNSAM. Implementa un sistema completo de gestión de pedidos aplicando estructuras de datos avanzadas (árboles, heaps, grafos) y paradigmas algorítmicos como greedy, programación dinámica y backtracking para resolver problemas reales de pedidos y ruteo.",
+        en: "University academic project for the Algorithms 2 & 3 course at UNSAM. Implements a full order management system applying advanced data structures (trees, heaps, graphs) and algorithmic paradigms such as greedy, dynamic programming, and backtracking to solve real-world ordering and routing problems.",
+        es: "Proyecto académico universitario para la materia Algoritmos 2 y 3 de la UNSAM. Implementa un sistema completo de gestión de pedidos aplicando estructuras de datos avanzadas (árboles, heaps, grafos) y paradigmas algorítmicos como greedy, programación dinámica y backtracking para resolver problemas reales de pedidos y ruteo.",
       },
       technologies: ["Kotlin", "Data Structures", "Graphs", "Algorithms", "OOP", "UNSAM"],
       image: "/projects/algo-que-pedir.png",
@@ -493,6 +509,16 @@ export const portfolioData: PortfolioData = {
           "Estructuras de datos avanzadas: árboles, heaps, colas de prioridad y representaciones de grafos.",
           "Paradigmas algorítmicos: heurísticas greedy, programación dinámica y estrategias de backtracking.",
           "Diseño orientado a objetos con separación limpia entre entidades de dominio y lógica algorítmica.",
+        ],
+      },
+      roadmap: {
+        en: [
+          "Validated test suite with 100% test coverage on graph and heap algorithms.",
+          "Codebase open-sourced as reference implementation for UNSAM Algorithms course.",
+        ],
+        es: [
+          "Suite de pruebas unitarias validada con cobertura en algoritmos de grafos y heaps.",
+          "Código publicado como implementación de referencia para Algoritmos UNSAM.",
         ],
       },
     },
@@ -514,6 +540,14 @@ export const portfolioData: PortfolioData = {
     successMessage: {
       en: "Message sent! I'll get back to you soon.",
       es: "¡Mensaje enviado! Te responderé a la brevedad.",
+    },
+    errorMessage: {
+      en: "Could not send the message automatically. Please open your email client below.",
+      es: "No se pudo enviar el mensaje automáticamente. Por favor abre tu cliente de correo abajo.",
+    },
+    mailFallbackButton: {
+      en: "Open Email Client",
+      es: "Abrir Cliente de Correo",
     },
     copyEmail: { en: "Copy Email", es: "Copiar Email" },
     copiedEmail: { en: "Copied!", es: "¡Copiado!" },

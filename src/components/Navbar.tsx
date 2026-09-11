@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import { portfolioData } from "@/data/portfolioData";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Sun, Moon, Menu, X, FileText } from "lucide-react";
 import profilePhoto from "../../public/profile.jpg";
+import { getAssetPath } from "@/lib/utils";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
@@ -23,6 +24,10 @@ export default function Navbar() {
     { id: "projects", label: t(nav.projects) },
     { id: "contact", label: t(nav.contact) },
   ];
+
+  const cvUrl = getAssetPath(
+    language === "es" ? "/cv/Julian_Barberis_CV.pdf" : "/cv/Julian_Barberis_Resume.pdf"
+  );
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-6">
@@ -69,8 +74,19 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Controls: Language & Theme & Mobile */}
+        {/* Right Controls: CV, Language & Theme & Mobile */}
         <div className="flex items-center gap-2">
+          {/* CV Download Button (Desktop) */}
+          <a
+            href={cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:ring-offset-2"
+            aria-label={language === "es" ? "Ver CV en español" : "View Resume in English"}
+          >
+            <FileText className="w-3 h-3 text-[#f8559f]" aria-hidden="true" />
+            <span>{t(nav.cvButton)}</span>
+          </a>
           {/* Apple Segmented Language Switcher */}
           <div className="flex items-center bg-black/5 dark:bg-white/5 rounded-full p-0.5 border border-white/10" role="radiogroup" aria-label={language === "es" ? "Idioma" : "Language"}>
             <button
@@ -152,6 +168,19 @@ export default function Navbar() {
                 </a>
               );
             })}
+
+            {/* CV Download Button (Mobile) */}
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-1.5 mt-1 px-3 py-2 rounded-xl text-xs font-semibold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f]"
+              aria-label={language === "es" ? "Ver CV en español" : "View Resume in English"}
+            >
+              <FileText className="w-3.5 h-3.5 text-[#f8559f]" aria-hidden="true" />
+              <span>{t(nav.cvButton)}</span>
+            </a>
           </nav>
         </div>
       )}

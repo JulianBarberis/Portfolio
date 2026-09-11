@@ -3,14 +3,15 @@
 import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { ProjectItem } from "@/data/types";
-import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
+import { ProjectItem, normalizeCategories } from "@/data/types";
+import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock, GraduationCap } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
 import {
   sanitizeExternalUrl,
   isSafeExternalUrl,
   getAssetPath,
 } from "@/lib/utils";
+import { PROJECT_CATEGORY_THEMES } from "@/lib/categoryTheme";
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -24,6 +25,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   const highlights = tArr(project.architectureHighlights);
   const roadmap = project.roadmap ? tArr(project.roadmap) : [];
+  const categories = Array.from(
+    new Set(normalizeCategories(project.category))
+  );
 
   return (
     <div 
@@ -48,18 +52,39 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-3 pb-3 border-b border-black/5 dark:border-white/10">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#f8559f]/10 text-[#f8559f]">
-                {project.category}
-              </span>
-              <span className="text-xs font-mono text-[var(--text-muted)]">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {categories.map((cat) => {
+                const theme = PROJECT_CATEGORY_THEMES[cat];
+                const isAcademic = cat === "Académico";
+                const label = theme ? theme.label[language] : cat;
+                const modalBadgeClass = theme
+                  ? theme.modalBadgeClass
+                  : "bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20";
+
+                return (
+                  <span
+                    key={cat}
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider transition-colors ${modalBadgeClass}`}
+                  >
+                    {isAcademic && <GraduationCap className="w-3 h-3" />}
+                    <span>{label}</span>
+                  </span>
+                );
+              })}
+              <span className="text-xs font-mono text-[var(--text-muted)] ml-0.5">
                 {project.year}
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mt-1">
               {project.title}
             </h3>
-            <p className="text-xs sm:text-sm font-medium text-[#3744bd] dark:text-[#93c5fd]">
+            {project.projectType && (
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 dark:text-purple-300 mt-0.5">
+                <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                <span>{t(project.projectType)}</span>
+              </div>
+            )}
+            <p className="text-xs sm:text-sm font-medium text-[#3744bd] dark:text-[#93c5fd] mt-1">
               {t(project.tagline)}
             </p>
           </div>
@@ -169,10 +194,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               href={sanitizeExternalUrl(project.demoUrl)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs text-white bg-[#f8559f] hover:bg-[#ff68ad] border border-white/15 shadow-md shadow-[#f8559f]/25 focus-visible:ring-2 focus-visible:ring-[#f8559f]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-semibold text-xs text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-[#f8559f]"
             >
+              <ExternalLink className="w-3.5 h-3.5 text-[#f8559f]" />
               <span>{language === "es" ? "Ir a la Demo" : "Open Demo"}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
             </a>
           ) : (
             <button

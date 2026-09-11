@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { ProjectItem } from "@/data/types";
+import { ProjectItem, normalizeCategories } from "@/data/types";
 import { useLanguage } from "@/context/LanguageContext";
 import TechIcon from "@/components/TechIcon";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
-import { ExternalLink, Rocket, Clock } from "lucide-react";
+import { ExternalLink, Rocket, Clock, GraduationCap } from "lucide-react";
 import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
+import { PROJECT_CATEGORY_THEMES } from "@/lib/categoryTheme";
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -25,6 +26,9 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const { language, t } = useLanguage();
   const isLive = project.status === "live";
+  const categories = Array.from(
+    new Set(normalizeCategories(project.category))
+  );
 
   return (
     <div
@@ -40,26 +44,45 @@ export default function ProjectCard({
 
         {/* Category & Status */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <span className="text-[11px] font-mono font-bold text-[#3744bd] dark:text-[#93c5fd] uppercase tracking-wider">
-            {project.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {categories.map((cat) => {
+              const theme = PROJECT_CATEGORY_THEMES[cat];
+              const isAcademic = cat === "Académico";
+              const label = theme ? theme.label[language] : cat;
+              const pillClass = theme
+                ? theme.pillClass
+                : "text-[#3744bd] dark:text-[#93c5fd] bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/20 dark:border-indigo-400/30";
 
-          {project.status === "live" ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span>{language === "es" ? "En Producción" : "Live"}</span>
-            </span>
-          ) : project.status === "in_development" ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-              <span>{language === "es" ? "En Desarrollo" : "In Dev"}</span>
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
-              <Clock className="w-2.5 h-2.5" />
-              <span>{language === "es" ? "Deploy Próximo" : "Deploying"}</span>
-            </span>
-          )}
+              return (
+                <span
+                  key={cat}
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider transition-colors ${pillClass}`}
+                >
+                  {isAcademic && <GraduationCap className="w-2.5 h-2.5" />}
+                  <span>{label}</span>
+                </span>
+              );
+            })}
+          </div>
+
+          <div className="shrink-0">
+            {project.status === "live" ? (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>{language === "es" ? "En Producción" : "Live"}</span>
+              </span>
+            ) : project.status === "in_development" ? (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                <span>{language === "es" ? "En Desarrollo" : "In Dev"}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#f8559f]/10 text-[#f8559f]">
+                <Clock className="w-2.5 h-2.5" />
+                <span>{language === "es" ? "Deploy Próximo" : "Deploying"}</span>
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Title & Tagline */}
@@ -125,10 +148,10 @@ export default function ProjectCard({
               rel="noopener noreferrer"
               aria-label={`Live demo for ${project.title}`}
               tabIndex={isCoverflowSide ? -1 : 0}
-              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-[#f8559f] to-[#ff68ad] hover:opacity-90 border border-white/15 shadow-sm shadow-[#f8559f]/25 active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none"
+              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[var(--text-primary)] apple-glass hover:border-[#f8559f]/50 hover:bg-[#f8559f]/10 active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none"
             >
               <span>Demo</span>
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3 h-3 text-[#f8559f]" />
             </a>
           )}
         </div>

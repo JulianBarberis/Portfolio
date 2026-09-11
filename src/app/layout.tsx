@@ -51,11 +51,11 @@ export default function RootLayout({
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: https:",
     "font-src 'self' data: https://fonts.gstatic.com",
-    `connect-src 'self'${isDev ? " ws: wss: http://localhost:* ws://localhost:*" : ""}`,
+    `connect-src 'self' https://formsubmit.co https://formspree.io${isDev ? " ws: wss: http://localhost:* ws://localhost:*" : ""}`,
     "frame-src 'none'",
     "object-src 'none'",
     "base-uri 'self'",
-    "form-action 'self'",
+    "form-action 'self' https://formsubmit.co https://formspree.io",
     ...(isDev ? [] : ["upgrade-insecure-requests"]),
   ].join("; ");
 

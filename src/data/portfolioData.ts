@@ -31,8 +31,8 @@ export const portfolioData: PortfolioData = {
       es: "Disponible para nuevas oportunidades",
     },
     shortBio: {
-      en: "Im a Software Developer. Building scalable backends with Kotlin & JAVA with Spring Boot, modern interfaces with React, Next & TypeScript, and containerized Docker systems.",
-      es: "Soy Desarrollador de Software. Construyo backends escalables en Kotlin & JAVA con Spring Boot, interfaces modernas en React, Next & TypeScript y sistemas en Docker.",
+      en: "Building scalable backends with Kotlin & JAVA with Spring Boot, modern interfaces with React, Next & TypeScript, and containerized Docker systems.",
+      es: "Construyo backends escalables en Kotlin & JAVA con Spring Boot, interfaces modernas en React, Next & TypeScript y sistemas en Docker.",
     },
     fullBio: {
       en: [

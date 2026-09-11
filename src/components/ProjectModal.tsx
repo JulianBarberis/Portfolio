@@ -11,6 +11,7 @@ import {
   isSafeExternalUrl,
   getAssetPath,
 } from "@/lib/utils";
+import { PROJECT_CATEGORY_THEMES } from "@/lib/categoryTheme";
 
 interface ProjectModalProps {
   project: ProjectItem | null;
@@ -53,26 +54,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           <div>
             <div className="flex flex-wrap items-center gap-1.5">
               {categories.map((cat) => {
+                const theme = PROJECT_CATEGORY_THEMES[cat];
                 const isAcademic = cat === "Académico";
-                const label =
-                  isAcademic
-                    ? language === "es"
-                      ? "Académico"
-                      : "Academic"
-                    : cat === "AI"
-                    ? language === "es"
-                      ? "IA"
-                      : "AI"
-                    : cat;
+                const label = theme ? theme.label[language] : cat;
+                const modalBadgeClass = theme
+                  ? theme.modalBadgeClass
+                  : "bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20";
 
                 return (
                   <span
                     key={cat}
-                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider ${
-                      isAcademic
-                        ? "bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/30"
-                        : "bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20"
-                    }`}
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider transition-colors ${modalBadgeClass}`}
                   >
                     {isAcademic && <GraduationCap className="w-3 h-3" />}
                     <span>{label}</span>

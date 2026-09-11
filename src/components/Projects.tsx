@@ -11,6 +11,7 @@ import CoverflowCarousel from "./carousel/CoverflowCarousel";
 import CarouselControls from "./carousel/CarouselControls";
 import { FolderGit2 } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
+import { PROJECT_CATEGORY_THEMES } from "@/lib/categoryTheme";
 
 function EmptyCategory({ onResetCategory }: { onResetCategory: () => void }) {
   const { language } = useLanguage();
@@ -197,10 +198,16 @@ export default function Projects() {
           aria-label={
             language === "es" ? "Filtrar por categoría" : "Filter by category"
           }
-          className="flex flex-wrap items-center justify-center gap-1.5 mb-8 p-1 rounded-full apple-glass max-w-fit mx-auto"
+          className="flex flex-wrap items-center justify-center gap-1.5 mb-8 p-1.5 rounded-full apple-glass border border-white/10 shadow-lg max-w-fit mx-auto"
         >
           {categories.map((cat) => {
             const isSelected = activeCategory === cat;
+            const theme = PROJECT_CATEGORY_THEMES[cat as ProjectCategory];
+            const activeClass =
+              cat === "All"
+                ? "bg-white/20 dark:bg-white/20 text-white font-semibold shadow-sm border border-white/30"
+                : theme?.activeTabClass ?? "bg-[#3744bd] text-white shadow-sm";
+
             return (
               <button
                 key={cat}
@@ -210,13 +217,16 @@ export default function Projects() {
                 tabIndex={isSelected ? 0 : -1}
                 aria-controls="projects-tabpanel"
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-3.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none ${
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] focus-visible:outline-none ${
                   isSelected
-                    ? "bg-[#3744bd] text-white shadow-sm"
-                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                    ? `${activeClass} font-semibold`
+                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
                 }`}
               >
-                {getCategoryLabel(cat)}
+                {isSelected && theme && (
+                  <span className={`w-1.5 h-1.5 rounded-full ${theme.dotColor}`} />
+                )}
+                <span>{getCategoryLabel(cat)}</span>
               </button>
             );
           })}

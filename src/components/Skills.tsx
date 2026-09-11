@@ -5,6 +5,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import TechIcon from "./TechIcon";
 import { Sparkles } from "lucide-react";
+import { SKILL_CATEGORY_THEMES } from "@/lib/categoryTheme";
 
 export default function Skills() {
   const { language, t } = useLanguage();
@@ -35,7 +36,7 @@ export default function Skills() {
         
         {/* Header (Achyut Katiyar Typography & Hierarchy) */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f8559f]/10 border border-[#f8559f]/30 text-xs font-bold uppercase tracking-wider text-[#f8559f]">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">
             <Sparkles className="w-3 h-3" />
             <span>{language === "es" ? "Habilidades" : "Skills"}</span>
           </div>
@@ -49,33 +50,37 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Category Pill Switcher (Minimalist Segmented Nav) */}
+        {/* Category Pill Switcher (Minimalist Segmented Nav with Distinct Colors) */}
         <div className="flex items-center justify-center mb-8">
           <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1.5 rounded-full apple-glass border border-white/10 shadow-lg max-w-full">
             <button
               onClick={() => setSelectedCategory("all")}
-              className={`px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
                 selectedCategory === "all"
-                  ? "bg-white/15 dark:bg-white/15 border border-white/20 text-white font-semibold shadow-sm"
+                  ? "bg-white/20 dark:bg-white/20 text-white font-semibold shadow-sm border border-white/30"
                   : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
               }`}
             >
-              {language === "es" ? "Todos" : "All"}
+              <span>{language === "es" ? "Todos" : "All"}</span>
             </button>
 
             {categories.map((cat) => {
               const isSelected = selectedCategory === cat.id;
+              const theme = SKILL_CATEGORY_THEMES[cat.id];
               return (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#f8559f] ${
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 focus-visible:ring-2 focus-visible:ring-violet-400 ${
                     isSelected
-                      ? "bg-white/15 dark:bg-white/15 border border-white/20 text-white font-semibold shadow-sm"
+                      ? `${theme?.activeClass ?? "bg-white/15 text-white"} font-semibold border`
                       : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5"
                   }`}
                 >
-                  {t(cat.title)}
+                  {isSelected && theme && (
+                    <span className={`w-1.5 h-1.5 rounded-full ${theme.dotClass}`} />
+                  )}
+                  <span>{t(cat.title)}</span>
                 </button>
               );
             })}

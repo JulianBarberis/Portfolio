@@ -17,7 +17,7 @@ export default function About() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f8559f]/10 border border-[#f8559f]/30 text-xs font-bold uppercase tracking-wider text-[#f8559f]">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
             <User className="w-3 h-3" />
             <span>{language === "es" ? "Sobre mí" : "About Me"}</span>
           </div>

@@ -5,7 +5,7 @@ import { ProjectItem, normalizeCategories } from "@/data/types";
 import { useLanguage } from "@/context/LanguageContext";
 import TechIcon from "@/components/TechIcon";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
-import { ExternalLink, Rocket, Clock } from "lucide-react";
+import { ExternalLink, Rocket, Clock, GraduationCap } from "lucide-react";
 import { sanitizeExternalUrl, isSafeExternalUrl } from "@/lib/utils";
 
 interface ProjectCardProps {
@@ -44,14 +44,33 @@ export default function ProjectCard({
         {/* Category & Status */}
         <div className="flex items-center justify-between gap-2 pt-1">
           <div className="flex flex-wrap items-center gap-1.5">
-            {categories.map((cat) => (
-              <span
-                key={cat}
-                className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-[#3744bd] dark:text-[#93c5fd] bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/20 dark:border-indigo-400/30"
-              >
-                {cat}
-              </span>
-            ))}
+            {categories.map((cat) => {
+              const isAcademic = cat === "Académico";
+              const label =
+                isAcademic
+                  ? language === "es"
+                    ? "Académico"
+                    : "Academic"
+                  : cat === "AI"
+                  ? language === "es"
+                    ? "IA"
+                    : "AI"
+                  : cat;
+
+              return (
+                <span
+                  key={cat}
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                    isAcademic
+                      ? "text-purple-600 dark:text-purple-300 bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/20 dark:border-purple-400/30"
+                      : "text-[#3744bd] dark:text-[#93c5fd] bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/20 dark:border-indigo-400/30"
+                  }`}
+                >
+                  {isAcademic && <GraduationCap className="w-2.5 h-2.5" />}
+                  <span>{label}</span>
+                </span>
+              );
+            })}
           </div>
 
           <div className="shrink-0">

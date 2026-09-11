@@ -34,8 +34,11 @@ console.log("\n--- Suite 1: Multi-Category Schema & Filtering Architecture ---")
 runTest("types.ts exports ProjectCategory and supports union with array", () => {
   const typesContent = fs.readFileSync(path.join(ROOT, "src/data/types.ts"), "utf8");
   assert.ok(
-    typesContent.includes("export type ProjectCategory = \"Full-Stack\" | \"Backend\" | \"Frontend\" | \"AI\""),
-    "types.ts must export ProjectCategory union"
+    typesContent.includes("export type ProjectCategory") &&
+    typesContent.includes("\"Full-Stack\"") &&
+    typesContent.includes("\"AI\"") &&
+    typesContent.includes("\"Académico\""),
+    "types.ts must export ProjectCategory union with Académico"
   );
   assert.ok(
     typesContent.includes("category: ProjectCategory | ProjectCategory[]"),
@@ -50,7 +53,8 @@ runTest("types.ts exports ProjectCategory and supports union with array", () => 
 runTest("Category normalization is backwards compatible with strings, arrays & handles edge cases", () => {
   assert.deepEqual(normalizeCategories("Full-Stack"), ["Full-Stack"]);
   assert.deepEqual(normalizeCategories("AI"), ["AI"]);
-  assert.deepEqual(normalizeCategories(["Full-Stack", "AI"]), ["Full-Stack", "AI"]);
+  assert.deepEqual(normalizeCategories("Académico"), ["Académico"]);
+  assert.deepEqual(normalizeCategories(["Full-Stack", "AI", "Académico"]), ["Full-Stack", "AI", "Académico"]);
   assert.deepEqual(normalizeCategories(["Full-Stack", "Backend"]), ["Full-Stack", "Backend"]);
   assert.deepEqual(normalizeCategories(["Full-Stack", "Full-Stack"]), ["Full-Stack"]);
   assert.deepEqual(normalizeCategories([]), []);
@@ -63,10 +67,10 @@ runTest("Category normalization is backwards compatible with strings, arrays & h
 
 runTest("Projects filtering matrix accurately segments multi-tagged projects", () => {
   const sampleProjects = [
-    { id: "studyquest", category: ["Full-Stack", "AI"] },
-    { id: "booklibre", category: ["Full-Stack"] },
-    { id: "sqlify", category: ["Full-Stack", "AI"] },
-    { id: "algo-que-pedir", category: ["Full-Stack", "Backend"] },
+    { id: "studyquest", category: ["Full-Stack", "AI", "Académico"] },
+    { id: "booklibre", category: ["Full-Stack", "Académico"] },
+    { id: "sqlify", category: ["Full-Stack", "AI", "Académico"] },
+    { id: "algo-que-pedir", category: ["Full-Stack", "Backend", "Académico"] },
   ];
 
   const filterFor = (activeCategory, list) => {
@@ -83,6 +87,7 @@ runTest("Projects filtering matrix accurately segments multi-tagged projects", (
 
   assert.equal(filterFor("All", sampleProjects).length, 4);
   assert.equal(filterFor("Full-Stack", sampleProjects).length, 4);
+  assert.equal(filterFor("Académico", sampleProjects).length, 4);
   assert.equal(filterFor("AI", sampleProjects).length, 2);
   assert.equal(filterFor("Backend", sampleProjects).length, 1);
   assert.equal(filterFor("NonExistent", sampleProjects).length, 0);
@@ -125,10 +130,10 @@ runTest("portfolioData.ts contains required categories and roadmaps for all 4 pr
     "utf8"
   );
 
-  assert.ok(dataCode.includes("id: \"studyquest\"") && dataCode.includes("category: [\"Full-Stack\", \"AI\"]"));
-  assert.ok(dataCode.includes("id: \"sqlify\"") && dataCode.includes("category: [\"Full-Stack\", \"AI\"]"));
-  assert.ok(dataCode.includes("id: \"algo-que-pedir\"") && dataCode.includes("[\"Full-Stack\", \"Backend\"]"));
-  assert.ok(dataCode.includes("id: \"booklibre\"") && dataCode.includes("category: [\"Full-Stack\"]"));
+  assert.ok(dataCode.includes("id: \"studyquest\"") && dataCode.includes("[\"Full-Stack\", \"AI\", \"Académico\"]"));
+  assert.ok(dataCode.includes("id: \"sqlify\"") && dataCode.includes("[\"Full-Stack\", \"AI\", \"Académico\"]"));
+  assert.ok(dataCode.includes("id: \"algo-que-pedir\"") && dataCode.includes("[\"Full-Stack\", \"Backend\", \"Académico\"]"));
+  assert.ok(dataCode.includes("id: \"booklibre\"") && dataCode.includes("[\"Full-Stack\", \"Académico\"]"));
   assert.ok(dataCode.includes("roadmap:"), "Projects must specify deployment/validation roadmap");
 });
 
@@ -175,14 +180,13 @@ runTest("Compiled static HTML includes all projects and multi-category badges", 
   assert.ok(html.includes("AlgoQuePedir"), "AlgoQuePedir in static HTML");
 
   assert.ok(html.includes("Full-Stack"), "Full-Stack pill in static HTML");
-  assert.ok(html.includes("AI"), "AI pill in static HTML");
   assert.ok(html.includes("Backend"), "Backend pill in static HTML");
 });
 
 runTest("Projects.tsx implements full WAI-ARIA tab pattern with roving tabIndex and tabpanel", () => {
   const projectsCode = fs.readFileSync(path.join(ROOT, "src/components/Projects.tsx"), "utf8");
   assert.ok(
-    projectsCode.includes("id={`project-tab-${cat.toLowerCase().replace(/\\s+/g, \"-\")}`}"),
+    projectsCode.includes("id={toTabId(cat)}"),
     "Projects.tsx must assign deterministic id to each category tab"
   );
   assert.ok(

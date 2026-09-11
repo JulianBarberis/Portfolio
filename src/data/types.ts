@@ -47,7 +47,12 @@ export interface SkillCategory {
   }[];
 }
 
-export type ProjectCategory = "Full-Stack" | "Backend" | "Frontend" | "AI";
+export type ProjectCategory =
+  | "Full-Stack"
+  | "Backend"
+  | "Frontend"
+  | "AI"
+  | "Académico";
 
 /**
  * Normalizes project category/categories input into a deduplicated, trimmed array of ProjectCategory.
@@ -85,6 +90,7 @@ export interface ProjectItem {
   roadmap?: LocalizedArray;
   image?: string;
   category: ProjectCategory | ProjectCategory[];
+  projectType?: LocalizedString;
 }
 
 export interface PortfolioData {

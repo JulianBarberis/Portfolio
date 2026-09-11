@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { ProjectItem, normalizeCategories } from "@/data/types";
-import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock } from "lucide-react";
+import { X, ExternalLink, Layers, CheckCircle2, Rocket, Clock, GraduationCap } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/SocialIcons";
 import {
   sanitizeExternalUrl,
@@ -52,14 +52,33 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         <div className="flex items-start justify-between gap-3 pb-3 border-b border-black/5 dark:border-white/10">
           <div>
             <div className="flex flex-wrap items-center gap-1.5">
-              {categories.map((cat) => (
-                <span
-                  key={cat}
-                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20"
-                >
-                  {cat}
-                </span>
-              ))}
+              {categories.map((cat) => {
+                const isAcademic = cat === "Académico";
+                const label =
+                  isAcademic
+                    ? language === "es"
+                      ? "Académico"
+                      : "Academic"
+                    : cat === "AI"
+                    ? language === "es"
+                      ? "IA"
+                      : "AI"
+                    : cat;
+
+                return (
+                  <span
+                    key={cat}
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider ${
+                      isAcademic
+                        ? "bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/30"
+                        : "bg-[#f8559f]/10 text-[#f8559f] border border-[#f8559f]/20"
+                    }`}
+                  >
+                    {isAcademic && <GraduationCap className="w-3 h-3" />}
+                    <span>{label}</span>
+                  </span>
+                );
+              })}
               <span className="text-xs font-mono text-[var(--text-muted)] ml-0.5">
                 {project.year}
               </span>
@@ -67,7 +86,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mt-1">
               {project.title}
             </h3>
-            <p className="text-xs sm:text-sm font-medium text-[#3744bd] dark:text-[#93c5fd]">
+            {project.projectType && (
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 dark:text-purple-300 mt-0.5">
+                <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                <span>{t(project.projectType)}</span>
+              </div>
+            )}
+            <p className="text-xs sm:text-sm font-medium text-[#3744bd] dark:text-[#93c5fd] mt-1">
               {t(project.tagline)}
             </p>
           </div>

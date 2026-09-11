@@ -88,8 +88,18 @@ export default function Projects() {
     Math.max(0, filteredProjects.length - 1)
   );
 
-  const handleCategoryChange = (cat: string) => {
-    setActiveCategory(cat);
+  const toTabId = (cat: string) =>
+    `project-tab-${cat.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-")}`;
+
+  const getCategoryLabel = (cat: string) => {
+    if (cat === "All") return language === "es" ? "Todos" : "All";
+    if (cat === "AI") return language === "es" ? "IA" : "AI";
+    if (cat === "Académico") return language === "es" ? "Académico" : "Academic";
+    return cat;
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
     setActiveIndex(0);
   };
 
@@ -119,7 +129,7 @@ export default function Projects() {
     if (nextIndex !== -1) {
       const nextCategory = categories[nextIndex];
       handleCategoryChange(nextCategory);
-      const nextTabId = `project-tab-${nextCategory.toLowerCase().replace(/\s+/g, "-")}`;
+      const nextTabId = toTabId(nextCategory);
       requestAnimationFrame(() => {
         document.getElementById(nextTabId)?.focus();
       });
@@ -194,7 +204,7 @@ export default function Projects() {
             return (
               <button
                 key={cat}
-                id={`project-tab-${cat.toLowerCase().replace(/\s+/g, "-")}`}
+                id={toTabId(cat)}
                 role="tab"
                 aria-selected={isSelected}
                 tabIndex={isSelected ? 0 : -1}
@@ -206,7 +216,7 @@ export default function Projects() {
                     : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 }`}
               >
-                {cat === "All" ? (language === "es" ? "Todos" : "All") : cat}
+                {getCategoryLabel(cat)}
               </button>
             );
           })}
@@ -234,7 +244,7 @@ export default function Projects() {
           <div
             id="projects-tabpanel"
             role="tabpanel"
-            aria-labelledby={`project-tab-${activeCategory.toLowerCase().replace(/\s+/g, "-")}`}
+            aria-labelledby={toTabId(activeCategory)}
             className="relative w-full"
           >
             <AnimatePresence mode="wait">

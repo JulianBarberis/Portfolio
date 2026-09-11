@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import confetti from "canvas-confetti";
-import { Mail, Send, Copy, Check, MapPin, Sparkles } from "lucide-react";
+import { Mail, Send, Copy, Check, MapPin, Sparkles, AlertCircle, ExternalLink } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
 
 export default function Contact() {
@@ -15,16 +15,18 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
+  const isMountedRef = React.useRef(true);
   const copyTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const submitTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const resetSubmittedTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => {
+    isMountedRef.current = true;
     return () => {
+      isMountedRef.current = false;
       if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
-      if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
       if (resetSubmittedTimeoutRef.current) clearTimeout(resetSubmittedTimeoutRef.current);
     };
   }, []);
@@ -63,20 +65,52 @@ export default function Contact() {
       await navigator.clipboard.writeText(personal.email);
       setCopied(true);
       if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
-      copyTimeoutRef.current = setTimeout(() => setCopied(false), 2500);
+      copyTimeoutRef.current = setTimeout(() => {
+        if (isMountedRef.current) setCopied(false);
+      }, 2500);
     } catch {
       // Fallback
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
-    submitTimeoutRef.current = setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    const name = sanitizeText(formData.name);
+    const email = sanitizeText(formData.email);
+    const message = sanitizeText(formData.message);
+
+    const formEndpoint =
+      process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ||
+      `https://formsubmit.co/ajax/${personal.email}`;
+
+    try {
+      const response = await fetch(formEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Nuevo mensaje de contacto en tu Portfolio: ${name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      if (!isMountedRef.current) return;
+
       setSubmitted(true);
 
       confetti({
@@ -89,10 +123,31 @@ export default function Contact() {
       setFormData({ name: "", email: "", message: "" });
       setFormErrors({});
       if (resetSubmittedTimeoutRef.current) clearTimeout(resetSubmittedTimeoutRef.current);
-      resetSubmittedTimeoutRef.current = setTimeout(() => setSubmitted(false), 5000);
-    }, 600);
+      resetSubmittedTimeoutRef.current = setTimeout(() => {
+        if (isMountedRef.current) setSubmitted(false);
+      }, 5000);
+    } catch {
+      if (!isMountedRef.current) return;
+      setSubmitError(
+        contact.errorMessage
+          ? t(contact.errorMessage)
+          : language === "es"
+          ? "No se pudo enviar el mensaje automáticamente. Por favor abre tu cliente de correo abajo."
+          : "Could not send the message automatically. Please open your email client below."
+      );
+    } finally {
+      if (isMountedRef.current) {
+        setIsSubmitting(false);
+      }
+    }
   };
 
+
+  const mailtoUrl = `mailto:${personal.email}?subject=${encodeURIComponent(
+    `Contacto Portfolio - ${formData.name || "Nuevo contacto"}`
+  )}&body=${encodeURIComponent(
+    `${formData.message}\n\n---\nDe: ${formData.name || "Visitante"} (${formData.email || "Sin email"})`
+  )}`;
 
   return (
     <section id="contact" className="py-16 relative">
@@ -197,7 +252,35 @@ export default function Contact() {
                 </div>
               )}
 
+              {submitError && (
+                <div
+                  className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-semibold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+                  role="alert"
+                >
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-amber-500 shrink-0" aria-hidden="true" />
+                    <span>{submitError}</span>
+                  </div>
+                  <a
+                    href={mailtoUrl}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-900 dark:text-amber-100 text-[11px] font-bold transition-all focus-visible:ring-2 focus-visible:ring-amber-500 shrink-0"
+                  >
+                    <span>{contact.mailFallbackButton ? t(contact.mailFallbackButton) : "Email"}</span>
+                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                  </a>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-3" noValidate>
+                {/* Honeypot field for anti-spam bots */}
+                <input
+                  type="text"
+                  name="_honey"
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="contact-name" className="sr-only">{language === "es" ? "Tu nombre" : "Your name"}</label>

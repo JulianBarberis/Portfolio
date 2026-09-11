@@ -19,6 +19,14 @@ function renderContact(lang: "es" | "en" = "es") {
 describe("Contact Component (src/components/Contact.tsx)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => ({ success: "true", message: "Form submitted successfully" }),
+      })
+    );
   });
 
   describe("Form Validation", () => {
@@ -199,6 +207,138 @@ describe("Contact Component (src/components/Contact.tsx)", () => {
       expect(screen.getByPlaceholderText("Nombre")).toHaveValue("");
       expect(screen.getByPlaceholderText("Email")).toHaveValue("");
       expect(screen.getByPlaceholderText("Mensaje")).toHaveValue("");
+
+      // Verify fetch call payload
+      expect(global.fetch).toHaveBeenCalledWith(
+        `https://formsubmit.co/ajax/${portfolioData.personal.email}`,
+        expect.objectContaining({
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: "Julian Barberis",
+            email: "julian@example.com",
+            message: "Hola! Me interesa conversar sobre oportunidades de software engineering.",
+            _subject: "Nuevo mensaje de contacto en tu Portfolio: Julian Barberis",
+            _template: "table",
+            _captcha: "false",
+          }),
+        })
+      );
+    });
+
+    it("handles API failure gracefully, showing error banner and mailto fallback", async () => {
+      const user = userEvent.setup();
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockRejectedValueOnce(new Error("Network connection lost"))
+      );
+
+      renderContact("es");
+
+      await user.type(screen.getByPlaceholderText("Nombre"), "Julian Barberis");
+      await user.type(screen.getByPlaceholderText("Email"), "julian@example.com");
+      await user.type(
+        screen.getByPlaceholderText("Mensaje"),
+        "Mensaje de prueba que debe preservarse ante un error."
+      );
+
+      await user.click(screen.getByRole("button", { name: /Enviar Mensaje/i }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(/No se pudo enviar el mensaje automáticamente/i)
+        ).toBeInTheDocument();
+      });
+
+      // Confetti should not have been called
+      expect(confetti).not.toHaveBeenCalled();
+
+      // Form inputs must be preserved so user does not lose draft
+      expect(screen.getByPlaceholderText("Nombre")).toHaveValue("Julian Barberis");
+      expect(screen.getByPlaceholderText("Email")).toHaveValue("julian@example.com");
+      expect(screen.getByPlaceholderText("Mensaje")).toHaveValue(
+        "Mensaje de prueba que debe preservarse ante un error."
+      );
+
+      // Mail fallback link should be present with encoded params
+      const fallbackLink = screen.getByRole("link", { name: /Abrir Cliente de Correo/i });
+      expect(fallbackLink).toBeInTheDocument();
+      expect(fallbackLink).toHaveAttribute("href", expect.stringContaining("mailto:jbarberis.tech@gmail.com"));
+    });
+
+    it("displays English error and fallback text when submitting fails in 'en'", async () => {
+      const user = userEvent.setup();
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+        })
+      );
+
+      renderContact("en");
+
+      await user.type(screen.getByPlaceholderText("Name"), "Recruiter");
+      await user.type(screen.getByPlaceholderText("Email"), "recruiter@example.com");
+      await user.type(
+        screen.getByPlaceholderText("Message"),
+        "We would love to schedule an interview with you."
+      );
+
+      await user.click(screen.getByRole("button", { name: /Send Message/i }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Could not send the message automatically/i)
+        ).toBeInTheDocument();
+      });
+
+      const fallbackLink = screen.getByRole("link", { name: /Open Email Client/i });
+      expect(fallbackLink).toBeInTheDocument();
+      expect(fallbackLink).toHaveAttribute("href", expect.stringContaining("mailto:jbarberis.tech@gmail.com"));
+    });
+
+    it("renders honeypot field for bot spam deterrence", () => {
+      const { container } = renderContact("es");
+      const honeyInput = container.querySelector('input[name="_honey"]');
+      expect(honeyInput).toBeInTheDocument();
+      expect(honeyInput).toHaveStyle({ display: "none" });
+      expect(honeyInput).toHaveAttribute("tabIndex", "-1");
+    });
+
+    it("uses custom NEXT_PUBLIC_CONTACT_FORM_ENDPOINT if configured in environment", async () => {
+      const originalEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+      process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT = "https://custom-service.io/form-123";
+
+      try {
+        const user = userEvent.setup();
+        renderContact("es");
+
+        await user.type(screen.getByPlaceholderText("Nombre"), "Julian Barberis");
+        await user.type(screen.getByPlaceholderText("Email"), "julian@example.com");
+        await user.type(
+          screen.getByPlaceholderText("Mensaje"),
+          "Probando endpoint configurable mediante variable de entorno."
+        );
+
+        await user.click(screen.getByRole("button", { name: /Enviar Mensaje/i }));
+
+        await waitFor(() => {
+          expect(global.fetch).toHaveBeenCalledWith(
+            "https://custom-service.io/form-123",
+            expect.anything()
+          );
+        });
+      } finally {
+        if (originalEndpoint !== undefined) {
+          process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT = originalEndpoint;
+        } else {
+          delete process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+        }
+      }
     });
   });
 

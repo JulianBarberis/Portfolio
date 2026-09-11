@@ -136,6 +136,8 @@ export interface PortfolioData {
     sendButton: LocalizedString;
     sending: LocalizedString;
     successMessage: LocalizedString;
+    errorMessage?: LocalizedString;
+    mailFallbackButton?: LocalizedString;
     copyEmail: LocalizedString;
     copiedEmail: LocalizedString;
     locationLabel: LocalizedString;

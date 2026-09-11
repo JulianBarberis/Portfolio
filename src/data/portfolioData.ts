@@ -541,6 +541,14 @@ export const portfolioData: PortfolioData = {
       en: "Message sent! I'll get back to you soon.",
       es: "¡Mensaje enviado! Te responderé a la brevedad.",
     },
+    errorMessage: {
+      en: "Could not send the message automatically. Please open your email client below.",
+      es: "No se pudo enviar el mensaje automáticamente. Por favor abre tu cliente de correo abajo.",
+    },
+    mailFallbackButton: {
+      en: "Open Email Client",
+      es: "Abrir Cliente de Correo",
+    },
     copyEmail: { en: "Copy Email", es: "Copiar Email" },
     copiedEmail: { en: "Copied!", es: "¡Copiado!" },
     locationLabel: { en: "Location", es: "Ubicación" },

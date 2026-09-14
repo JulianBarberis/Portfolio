@@ -152,11 +152,17 @@ export default function Projects() {
 
     if (e.key === "ArrowLeft") {
       e.preventDefault();
-      setActiveIndex((prev) => Math.max(0, prev - 1));
+      setActiveIndex((prev) =>
+        filteredProjects.length > 0
+          ? (prev - 1 + filteredProjects.length) % filteredProjects.length
+          : 0
+      );
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
       setActiveIndex((prev) =>
-        Math.min(filteredProjects.length - 1, prev + 1)
+        filteredProjects.length > 0
+          ? (prev + 1) % filteredProjects.length
+          : 0
       );
     } else if (e.key === "Home") {
       e.preventDefault();
@@ -284,10 +290,18 @@ export default function Projects() {
             <CarouselControls
               total={filteredProjects.length}
               activeIndex={safeActiveIndex}
-              onPrev={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
+              onPrev={() =>
+                setActiveIndex((prev) =>
+                  filteredProjects.length > 0
+                    ? (prev - 1 + filteredProjects.length) % filteredProjects.length
+                    : 0
+                )
+              }
               onNext={() =>
                 setActiveIndex((prev) =>
-                  Math.min(filteredProjects.length - 1, prev + 1)
+                  filteredProjects.length > 0
+                    ? (prev + 1) % filteredProjects.length
+                    : 0
                 )
               }
               onSelectIndex={setActiveIndex}

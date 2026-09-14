@@ -328,16 +328,24 @@ describe("Projects Component (src/components/Projects.tsx)", () => {
       const nextButton = screen.getByRole("button", { name: /Siguiente proyecto/i });
       const prevButton = screen.getByRole("button", { name: /Proyecto anterior/i });
 
-      // At start, prev button should be disabled
-      expect(prevButton).toBeDisabled();
+      // In an infinite carousel, neither button is disabled at start
+      expect(prevButton).not.toBeDisabled();
+      expect(nextButton).not.toBeDisabled();
 
       // Click next
       await user.click(nextButton);
       expect(screen.getByText(/02/)).toBeInTheDocument();
-      expect(prevButton).not.toBeDisabled();
 
       // Click prev
       await user.click(prevButton);
+      expect(screen.getByText(/01/)).toBeInTheDocument();
+
+      // Click prev at index 0 wraps around to final project (04)
+      await user.click(prevButton);
+      expect(screen.getByText(/04/)).toBeInTheDocument();
+
+      // Click next at final project wraps around to first project (01)
+      await user.click(nextButton);
       expect(screen.getByText(/01/)).toBeInTheDocument();
     });
 
@@ -432,7 +440,7 @@ describe("Projects Component (src/components/Projects.tsx)", () => {
       expect(screen.getByText(/02/)).toBeInTheDocument();
     });
 
-    it("disables next button when on the final project", async () => {
+    it("wraps around to the first project when clicking next on the final project", async () => {
       const user = userEvent.setup();
       renderProjects("es");
 
@@ -442,7 +450,11 @@ describe("Projects Component (src/components/Projects.tsx)", () => {
       await user.click(nextButton);
 
       expect(screen.getByText(/04/)).toBeInTheDocument();
-      expect(nextButton).toBeDisabled();
+      expect(nextButton).not.toBeDisabled();
+
+      // Next click on project 04 wraps to project 01
+      await user.click(nextButton);
+      expect(screen.getByText(/01/)).toBeInTheDocument();
     });
 
     it("does not change carousel slide when keyboard events occur on interactive button elements", () => {

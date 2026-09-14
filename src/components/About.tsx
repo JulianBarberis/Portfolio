@@ -68,14 +68,14 @@ export default function About() {
           </div>
 
           {/* Julian's Profile Image */}
-          <div className="md:col-span-5 rounded-3xl overflow-hidden relative group min-h-[340px] sm:min-h-[380px] shadow-2xl">
+          <div className="md:col-span-5 w-full max-w-[320px] sm:max-w-[360px] md:max-w-none mx-auto rounded-3xl overflow-hidden relative group aspect-[4/5] md:aspect-auto md:h-full md:min-h-[420px] shadow-2xl border border-black/5 dark:border-white/10">
             <Image
               src={profilePhoto}
               alt="Julian Barberis"
               fill
               priority
               className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 360px, 40vw"
             />
           </div>
 

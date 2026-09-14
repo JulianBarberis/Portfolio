@@ -28,8 +28,9 @@ export default function CarouselControls({
     return null;
   }
 
-  const isPrevDisabled = activeIndex === 0;
-  const isNextDisabled = activeIndex === total - 1;
+  // In an infinite carousel with multiple projects, navigation wraps around seamlessly
+  const isPrevDisabled = total <= 1;
+  const isNextDisabled = total <= 1;
 
   const formatNumber = (num: number) => (num < 10 ? `0${num}` : `${num}`);
 

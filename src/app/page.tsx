@@ -11,14 +11,14 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen w-full overflow-x-clip">
       {/* Skip to content — WCAG 2.4.1 */}
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
 
       <Navbar />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 w-full overflow-x-clip">
         <Hero />
         <About />
         <Skills />

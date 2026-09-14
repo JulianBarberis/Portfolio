@@ -56,14 +56,12 @@ export default function CoverflowCarousel({
     const velocityThreshold = 400;
     const { offset, velocity } = info;
 
+    if (total <= 1) return;
+
     if (offset.x < -swipeThreshold || velocity.x < -velocityThreshold) {
-      if (activeIndex < total - 1) {
-        onSelectIndex(activeIndex + 1);
-      }
+      onSelectIndex((activeIndex + 1) % total);
     } else if (offset.x > swipeThreshold || velocity.x > velocityThreshold) {
-      if (activeIndex > 0) {
-        onSelectIndex(activeIndex - 1);
-      }
+      onSelectIndex((activeIndex - 1 + total) % total);
     }
   };
 
@@ -75,14 +73,15 @@ export default function CoverflowCarousel({
   };
 
   return (
-    <div
-      ref={stageRef}
-      className="relative w-full h-[570px] sm:h-[530px] flex items-center justify-center select-none touch-pan-y overflow-visible"
-      style={{
-        perspective: shouldReduceMotion ? undefined : 1000,
-        transformStyle: "preserve-3d",
-      }}
-    >
+    <div className="w-full overflow-x-clip">
+      <div
+        ref={stageRef}
+        className="relative w-full h-[570px] sm:h-[530px] flex items-center justify-center select-none touch-pan-y overflow-visible"
+        style={{
+          perspective: shouldReduceMotion ? undefined : 1000,
+          transformStyle: "preserve-3d",
+        }}
+      >
       <motion.div
         drag={shouldReduceMotion ? false : "x"}
         dragConstraints={{ left: 0, right: 0 }}
@@ -94,7 +93,11 @@ export default function CoverflowCarousel({
         }}
       >
         {projects.map((project, index) => {
-          const offset = index - activeIndex;
+          let offset = index - activeIndex;
+          if (total > 2) {
+            while (offset > total / 2) offset -= total;
+            while (offset < -total / 2) offset += total;
+          }
           const isCenter = offset === 0;
 
           let x = 0;
@@ -173,6 +176,7 @@ export default function CoverflowCarousel({
           );
         })}
       </motion.div>
+    </div>
     </div>
   );
 }

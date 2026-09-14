@@ -75,14 +75,15 @@ export default function CoverflowCarousel({
   };
 
   return (
-    <div
-      ref={stageRef}
-      className="relative w-full h-[570px] sm:h-[530px] flex items-center justify-center select-none touch-pan-y overflow-visible"
-      style={{
-        perspective: shouldReduceMotion ? undefined : 1000,
-        transformStyle: "preserve-3d",
-      }}
-    >
+    <div className="w-full overflow-x-clip">
+      <div
+        ref={stageRef}
+        className="relative w-full h-[570px] sm:h-[530px] flex items-center justify-center select-none touch-pan-y overflow-visible"
+        style={{
+          perspective: shouldReduceMotion ? undefined : 1000,
+          transformStyle: "preserve-3d",
+        }}
+      >
       <motion.div
         drag={shouldReduceMotion ? false : "x"}
         dragConstraints={{ left: 0, right: 0 }}
@@ -173,6 +174,7 @@ export default function CoverflowCarousel({
           );
         })}
       </motion.div>
+    </div>
     </div>
   );
 }

@@ -177,7 +177,7 @@ export default function Projects() {
       aria-label={
         language === "es" ? "Proyectos Destacados" : "Featured Projects"
       }
-      className="py-20 relative outline-none focus-visible:ring-1 focus-visible:ring-[#f8559f]/30"
+      className="py-20 relative outline-none focus-visible:ring-1 focus-visible:ring-[#f8559f]/30 overflow-x-clip"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -257,7 +257,7 @@ export default function Projects() {
             id="projects-tabpanel"
             role="tabpanel"
             aria-labelledby={toTabId(activeCategory)}
-            className="relative w-full"
+            className="relative w-full overflow-x-clip"
           >
             <AnimatePresence mode="wait">
               <motion.div

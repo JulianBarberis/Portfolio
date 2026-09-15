@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolioData } from "@/data/portfolioData";
 import confetti from "canvas-confetti";
-import { Mail, Send, Copy, Check, MapPin, Sparkles, AlertCircle, ExternalLink } from "lucide-react";
+import { Mail, Send, Copy, Check, Sparkles, AlertCircle, ExternalLink } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
 
 export default function Contact() {
@@ -203,15 +203,6 @@ export default function Contact() {
                   </>
                 )}
               </button>
-            </div>
-
-            {/* Location Pill */}
-            <div className="apple-glass-card p-4 rounded-3xl flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
-                <MapPin className="w-3.5 h-3.5 text-[#f8559f]" aria-hidden="true" />
-                <span>Buenos Aires</span>
-              </span>
-              <span className="text-[var(--text-muted)] font-mono text-[11px]">UTC-3</span>
             </div>
 
             {/* Social Channels */}

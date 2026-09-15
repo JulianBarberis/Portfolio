@@ -77,9 +77,6 @@ export default function Skills() {
                       : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
                 >
-                  {isSelected && theme && (
-                    <span className={`w-1.5 h-1.5 rounded-full ${theme.dotClass}`} />
-                  )}
                   <span>{t(cat.title)}</span>
                 </button>
               );

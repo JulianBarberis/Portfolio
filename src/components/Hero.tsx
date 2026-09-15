@@ -22,11 +22,7 @@ export default function Hero() {
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
             
             {/* Status Chip */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full apple-glass text-xs font-semibold text-[var(--text-primary)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f8559f] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f8559f]"></span>
-              </span>
+            <div className="inline-flex items-center px-3 py-1 rounded-full apple-glass text-xs font-semibold text-[var(--text-primary)]">
               <span>{t(personal.statusBadge)}</span>
             </div>
 
@@ -54,7 +50,7 @@ export default function Hero() {
               </span>
               <span className="px-3 py-1 rounded-full apple-glass flex items-center gap-1.5">
                 <Cpu className="w-3.5 h-3.5 text-[#3744bd] dark:text-[#8d9cf8]" />
-                <span>UNSAM Student</span>
+                <span>UNSAM Tutor</span>
               </span>
             </div>
 
@@ -175,10 +171,7 @@ export default function Hero() {
 
               {/* Footer Academic Note */}
               <div className="pt-2 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-xs text-[var(--text-muted)]">
-                <span className="flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#f8559f]"></span>
-                  <span>UNSAM • {language === "es" ? "Tecnicatura en Programación" : "CS Associate Degree"}</span>
-                </span>
+                <span>UNSAM • {language === "es" ? "Tecnicatura en Programación" : "CS Associate Degree"}</span>
                 <span className="text-[#f8559f] font-mono font-semibold">2023–2026</span>
               </div>
 
